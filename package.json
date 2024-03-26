@@ -1,0 +1,17 @@
+{
+  "name": "cdn-cgi_statuspages",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "fastify start server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/middie": "^8.3.0",
+    "cors": "^2.8.5",
+    "serve-static": "^2.0.0-beta.2"
+  }
+}
