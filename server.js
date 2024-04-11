@@ -50,16 +50,31 @@ module.exports = async function (fastify, opts) {
             case "1001":
                 fn = "noDatabaseConnection.html";
                 break;
+            case "1002":
+                fn = "sslError.html";
+                break;
             default:
-                fn = null;
+                fn = "pageNotFound.html";
         }
         fs.readFile(path.join(__dirname, `/html/${fn}`), 'utf-8', (err, data) => {
             if(err) {
                 console.error(err);
             }
-            const res = data.replace("__implement-ray-id__", request.headers["cf-ray"] || request.id);
+            // Inject the CloudFlare Ray ID
+            let res = data.replace("__implement-ray-id__", request.headers["cf-ray"] || request.id);
+            // Inject the JavaScript Sources at the bottom of the Body
+            res = res.replace('__implement_body_script__', '<!--Implement Body Scripts--><script src="/akami-cgi/js/bootstrap.bundle.min.js"></script>');
+            // Inject the Styling
+            res = res.replace('__implement_style__', '<!--Implemented Styling--><link rel="stylesheet" href="/akami-cgi/css/bootstrap.min.css">' +
+                '    <link rel="stylesheet" href="/akami-cgi/css/style.css">')
+
+            // Inject the Client IP
             const result = res.replace("__implement-ip__", request.headers["cf-ip"] || request.ip);
-            reply.header("Content-Type", "text/html").send(result);
+            reply.headers({
+                "Content-Type": "text/html",
+                "Server": "Akami Solutions",
+                "X-Powered-By": "A DNS System by Akami Solutions"
+            }).send(result);
         });
     })
 }
