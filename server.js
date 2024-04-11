@@ -15,7 +15,6 @@ module.exports = async function (fastify, opts) {
         let basePath = path.resolve(__dirname, 'assets/css');
 
         if (filePath.indexOf(basePath) !== 0) {
-            // The resolved file path does not reside within the expected directory return an error.
             res.status(403).send('Forbidden');
         } else {
             const stream = fs.createReadStream(filePath, 'utf8');
