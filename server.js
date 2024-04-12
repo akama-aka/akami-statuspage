@@ -7,8 +7,8 @@ module.exports = async function (fastify, opts) {
     const path = require('node:path')
     const serveStatic = require('serve-static')
 
-    fastify.use('/css/(.*)', serveStatic(path.join(__dirname, '/css')));
-    fastify.use('/js', serveStatic(path.join(__dirname, '/js')));
+    fastify.use('/css/(.css)', serveStatic(path.join(__dirname, '/css')));
+    fastify.use('/js/(.js)', serveStatic(path.join(__dirname, '/js')));
     fastify.get("/akami-cgi/css/:asset", (request, reply) => {
         let asset = path.basename(request.params.asset);
         let filePath = path.normalize(path.join(__dirname, '/assets/css/', asset));
