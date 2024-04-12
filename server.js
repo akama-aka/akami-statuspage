@@ -10,6 +10,10 @@ module.exports = async function (fastify, opts) {
     fastify.use('/css/(.css)', serveStatic(path.join(__dirname, '/css')));
     fastify.use('/js/(.js)', serveStatic(path.join(__dirname, '/js')));
     fastify.get("/akami-cgi/css/:asset", (request, reply) => {
+        const reg = /\.css$/.test(request.params.asset)
+        if (!reg) {
+            return false;
+        }
         let asset = path.basename(request.params.asset);
         let filePath = path.normalize(path.join(__dirname, '/assets/css/', asset));
         let basePath = path.resolve(__dirname, 'assets/css');
@@ -23,6 +27,10 @@ module.exports = async function (fastify, opts) {
         }
     })
     fastify.get("/akami-cgi/js/:asset", (request, reply) => {
+        const reg = /\.js$/.test(request.params.asset)
+        if (!reg) {
+            return false;
+        }
         const stream = fs.createReadStream(path.join(__dirname, '/assets/js/'+request.params.asset), 'utf8');
         reply.header("Content-Type", "application/javascript").send(stream || null);
     })
