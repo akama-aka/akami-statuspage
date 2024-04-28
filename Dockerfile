@@ -16,4 +16,4 @@ WORKDIR /opt/server
 COPY --chown=node:node ./ /opt/server
 RUN npm i
 EXPOSE $SERVER_PORT
-CMD [ "npm", "run server"]
+CMD [ "source ./.env && fastify start server.js -p $SERVER_PORT -a $SERVER_HOSTNAME -l $SERVER_LOG_LEVEL"]
