@@ -20,7 +20,7 @@ module.exports = async function (fastify, opts) {
         let basePath = path.resolve(__dirname, 'assets/css');
 
         if (filePath.indexOf(basePath) !== 0) {
-            res.status(403).send('Forbidden');
+            rep.status(403).send('Forbidden');
         } else {
             const stream = createReadStream(filePath, 'utf8');
             reply.header("Content-Type", "text/css").send(stream || null);
