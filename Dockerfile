@@ -16,4 +16,4 @@ WORKDIR /opt/server
 COPY --chown=node:node ./ /opt/server
 RUN npm i
 EXPOSE $SERVER_PORT
-CMD [ "npm", "run"]
+CMD [ "npm", "run server"]
