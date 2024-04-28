@@ -1,6 +1,6 @@
 'use strict'
 const {createReadStream,readFile} = require('node:fs');
-const {join } = require("node:path");
+const {join,basename,normalize,resolve } = require("node:path");
 module.exports = async function (fastify, opts) {
 
     await fastify.register(require('@fastify/middie'))
@@ -10,20 +10,20 @@ module.exports = async function (fastify, opts) {
     fastify.use('/css/(.css)', serveStatic(join(__dirname, '/css')));
     fastify.use('/js/(.js)', serveStatic(join(__dirname, '/js')));
     fastify.use('/fonts/(.ttf)', serveStatic(join(__dirname, '/fonts')))
-    fastify.get("/akami-cgi/css/:asset", (request, reply) => {
-        const reg = /\.css$/.test(request.params.asset)
+    fastify.get("/akami-cgi/css/:asset", (req, rep) => {
+        const reg = /\.css$/.test(req.params.asset)
         if (!reg) {
             return false;
         }
-        let asset = path.basename(request.params.asset);
-        let filePath = path.normalize(join(__dirname, '/assets/css/', asset));
-        let basePath = path.resolve(__dirname, 'assets/css');
+        let asset = basename(req.params.asset);
+        let filePath = normalize(join(__dirname, '/assets/css/', asset));
+        let basePath = resolve(__dirname, 'assets/css');
 
         if (filePath.indexOf(basePath) !== 0) {
             rep.status(403).send('Forbidden');
         } else {
             const stream = createReadStream(filePath, 'utf8');
-            reply.header("Content-Type", "text/css").send(stream || null);
+            rep.header("Content-Type", "text/css").send(stream || null);
         }
     })
     fastify.get("akami-cgi/fonts/:asset", (req, rep) => {
@@ -34,17 +34,17 @@ module.exports = async function (fastify, opts) {
         const stream = createReadStream(path.join(__dirname, '/assets/fonts/'+req.params.asset), 'utf8');
         rep.header("Content-Type", "font/ttf").send(stream || null);
     })
-    fastify.get("/akami-cgi/js/:asset", (request, reply) => {
-        const reg = /\.js$/.test(request.params.asset)
+    fastify.get("/akami-cgi/js/:asset", (req, rep) => {
+        const reg = /\.js$/.test(req.params.asset)
         if (!reg) {
             return false;
         }
-        const stream = createReadStream(path.join(__dirname, '/assets/js/'+request.params.asset), 'utf8');
-        reply.header("Content-Type", "application/javascript").send(stream || null);
+        const stream = createReadStream(join(__dirname, '/assets/js/'+req.params.asset), 'utf8');
+        rep.header("Content-Type", "application/javascript").send(stream || null);
     })
-    fastify.get("/akami-cgi/:code", (request, reply) => {
+    fastify.get("/akami-cgi/:code", (req, rep) => {
         let fn;
-        switch (request.params.code) {
+        switch (req.params.code) {
             case "404":
                 fn = "pageNotFound.html";
                 break;
@@ -77,7 +77,7 @@ module.exports = async function (fastify, opts) {
                 console.error(err);
             }
             // Inject the CloudFlare Ray ID
-            let res = data.replace("__implement-ray-id__", request.headers["cf-ray"] || request.id);
+            let res = data.replace("__implement-ray-id__", req.headers["cf-ray"] || req.id);
             // Inject the JavaScript Sources at the bottom of the Body
             res = res.replace('__implement_body_script__', '<!--Implement Body Scripts--><script src="/akami-cgi/js/bootstrap.bundle.min.js"></script>');
             // Inject the Styling
@@ -85,8 +85,8 @@ module.exports = async function (fastify, opts) {
                 '    <link rel="stylesheet" href="/akami-cgi/css/style.css">')
 
             // Inject the Client IP
-            const result = res.replace("__implement-ip__", request.headers["cf-ip"] || request.ip);
-            reply.headers({
+            const result = res.replace("__implement-ip__", req.headers["cf-ip"] || req.ip);
+            rep.headers({
                 "Content-Type": "text/html",
                 "Server": "Akami Solutions",
                 "X-Powered-By": "A DNS System by Akami Solutions"
