@@ -1,27 +1,27 @@
 'use strict'
-const fs = require('node:fs');
-const path = require("node:path");
+const {createReadStream,readFile} = require('node:fs');
+const {join } = require("node:path");
 module.exports = async function (fastify, opts) {
 
     await fastify.register(require('@fastify/middie'))
     const path = require('node:path')
     const serveStatic = require('serve-static')
 
-    fastify.use('/css/(.css)', serveStatic(path.join(__dirname, '/css')));
-    fastify.use('/js/(.js)', serveStatic(path.join(__dirname, '/js')));
+    fastify.use('/css/(.css)', serveStatic(join(__dirname, '/css')));
+    fastify.use('/js/(.js)', serveStatic(join(__dirname, '/js')));
     fastify.get("/akami-cgi/css/:asset", (request, reply) => {
         const reg = /\.css$/.test(request.params.asset)
         if (!reg) {
             return false;
         }
         let asset = path.basename(request.params.asset);
-        let filePath = path.normalize(path.join(__dirname, '/assets/css/', asset));
+        let filePath = path.normalize(join(__dirname, '/assets/css/', asset));
         let basePath = path.resolve(__dirname, 'assets/css');
 
         if (filePath.indexOf(basePath) !== 0) {
             res.status(403).send('Forbidden');
         } else {
-            const stream = fs.createReadStream(filePath, 'utf8');
+            const stream = createReadStream(filePath, 'utf8');
             reply.header("Content-Type", "text/css").send(stream || null);
         }
     })
@@ -30,7 +30,7 @@ module.exports = async function (fastify, opts) {
         if (!reg) {
             return false;
         }
-        const stream = fs.createReadStream(path.join(__dirname, '/assets/js/'+request.params.asset), 'utf8');
+        const stream = createReadStream(path.join(__dirname, '/assets/js/'+request.params.asset), 'utf8');
         reply.header("Content-Type", "application/javascript").send(stream || null);
     })
     fastify.get("/akami-cgi/:code", (request, reply) => {
@@ -63,7 +63,7 @@ module.exports = async function (fastify, opts) {
             default:
                 fn = "pageNotFound.html";
         }
-        fs.readFile(path.join(__dirname, `/html/${fn}`), 'utf-8', (err, data) => {
+        readFile(join(__dirname, `/html/${fn}`), 'utf-8', (err, data) => {
             if(err) {
                 console.error(err);
             }
