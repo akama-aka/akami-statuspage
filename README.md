@@ -13,7 +13,7 @@ the current version works with an additional web server that can operate on any 
 
 To illustrate how this system works, let's take the example of a web hosting provider that uses NGINX and this Node.js server.
 
-The website host configures NGINX so that when the path `/cdn-cgi/` appears in the URL, the request is redirected to this server. 
+The website host configures NGINX so that when the path `/akami-cgi/` appears in the URL, the request is redirected to this server. 
 In practice, this means that when such a call is made, the normal loading of the website is interrupted and the 
 Akami Solutions CDN CGI server takes control instead.
 
@@ -23,7 +23,7 @@ Setting up the Akami Solutions CDN CGI server requires the following steps:
 
 1. First, install the Node.js server using `npm` or the package manager of your choice.
 2. Then create a corresponding configuration file for NGINX.
-3. Then update the path in the configuration file to direct `/cdn-cgi/` to your Node.js server.
+3. Then update the path in the configuration file to direct `/akami-cgi/` to your Node.js server.
 
 The exact setup details and examples can be found in the installation instructions.
 
