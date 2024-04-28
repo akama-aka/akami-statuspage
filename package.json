@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "fastify start server.js"
+    "start": "echo 'WARNING >> This command is deprecated. Please use npm run instead!' && source ./.env && fastify start server.js -p $SERVER_PORT -a $SERVER_HOSTNAME -l $SERVER_LOG_LEVEL",
+    "run": "source ./.env && fastify start server.js -p $SERVER_PORT -a $SERVER_HOSTNAME -l $SERVER_LOG_LEVEL"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +13,7 @@
   "dependencies": {
     "@fastify/middie": "^8.3.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "serve-static": "^2.0.0-beta.2"
   }
 }
