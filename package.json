@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "echo -e '\\033[0;31m WARNING >> This command is deprecated. Please use npm run instead!' && source ./.env && fastify start server.js -p $SERVER_PORT -a $SERVER_HOSTNAME -l $SERVER_LOG_LEVEL \\033[0m ",
-    "run": "source ./.env && fastify start server.js -p $SERVER_PORT -a $SERVER_HOSTNAME -l $SERVER_LOG_LEVEL"
+    "server": "source ./.env && fastify start server.js -p $SERVER_PORT -a $SERVER_HOSTNAME -l $SERVER_LOG_LEVEL"
   },
   "keywords": [],
   "author": "",
