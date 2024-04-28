@@ -9,6 +9,7 @@ module.exports = async function (fastify, opts) {
 
     fastify.use('/css/(.css)', serveStatic(join(__dirname, '/css')));
     fastify.use('/js/(.js)', serveStatic(join(__dirname, '/js')));
+    fastify.use('/fonts/(.ttf)', serveStatic(join(__dirname, '/fonts')))
     fastify.get("/akami-cgi/css/:asset", (request, reply) => {
         const reg = /\.css$/.test(request.params.asset)
         if (!reg) {
@@ -24,6 +25,14 @@ module.exports = async function (fastify, opts) {
             const stream = createReadStream(filePath, 'utf8');
             reply.header("Content-Type", "text/css").send(stream || null);
         }
+    })
+    fastify.get("akami-cgi/fonts/:asset", (req, rep) => {
+        const reg = /\.ttf$/.test(req.params.asset)
+        if (!reg) {
+            return false;
+        }
+        const stream = createReadStream(path.join(__dirname, '/assets/fonts/'+req.params.asset), 'utf8');
+        rep.header("Content-Type", "font/ttf").send(stream || null);
     })
     fastify.get("/akami-cgi/js/:asset", (request, reply) => {
         const reg = /\.js$/.test(request.params.asset)
