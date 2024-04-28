@@ -1,8 +1,9 @@
 'use strict'
 const {createReadStream,readFile} = require('node:fs');
 const {join,basename,normalize,resolve } = require("node:path");
+require('dotenv').config();
 module.exports = async function (fastify, opts) {
-
+    let path_name = process.env.PATH_IDENTIFIER;
     await fastify.register(require('@fastify/middie'))
     const path = require('node:path')
     const serveStatic = require('serve-static')
@@ -10,7 +11,7 @@ module.exports = async function (fastify, opts) {
     fastify.use('/css/(.css)', serveStatic(join(__dirname, '/css')));
     fastify.use('/js/(.js)', serveStatic(join(__dirname, '/js')));
     fastify.use('/fonts/(.ttf)', serveStatic(join(__dirname, '/fonts')))
-    fastify.get("/akami-cgi/css/:asset", (req, rep) => {
+    fastify.get(`/${path_name}/css/:asset`, (req, rep) => {
         const reg = /\.css$/.test(req.params.asset)
         if (!reg) {
             return false;
@@ -26,7 +27,7 @@ module.exports = async function (fastify, opts) {
             rep.header("Content-Type", "text/css").send(stream || null);
         }
     })
-    fastify.get("akami-cgi/fonts/:asset", (req, rep) => {
+    fastify.get(`/${path_name}/fonts/:asset`, (req, rep) => {
         const reg = /\.ttf$/.test(req.params.asset)
         if (!reg) {
             return false;
@@ -34,7 +35,7 @@ module.exports = async function (fastify, opts) {
         const stream = createReadStream(path.join(__dirname, '/assets/fonts/'+req.params.asset), 'utf8');
         rep.header("Content-Type", "font/ttf").send(stream || null);
     })
-    fastify.get("/akami-cgi/js/:asset", (req, rep) => {
+    fastify.get(`/${path_name}/js/:asset`, (req, rep) => {
         const reg = /\.js$/.test(req.params.asset)
         if (!reg) {
             return false;
@@ -79,10 +80,10 @@ module.exports = async function (fastify, opts) {
             // Inject the CloudFlare Ray ID
             let res = data.replace("__implement-ray-id__", req.headers["cf-ray"] || req.id);
             // Inject the JavaScript Sources at the bottom of the Body
-            res = res.replace('__implement_body_script__', '<!--Implement Body Scripts--><script src="/akami-cgi/js/bootstrap.bundle.min.js"></script>');
+            res = res.replace('__implement_body_script__', '<!--Implement Body Scripts--><script src="/'+path_name+'/js/bootstrap.bundle.min.js"></script>');
             // Inject the Styling
-            res = res.replace('__implement_style__', '<!--Implemented Styling--><link rel="stylesheet" href="/akami-cgi/css/bootstrap.min.css">' +
-                '    <link rel="stylesheet" href="/akami-cgi/css/style.css">')
+            res = res.replace('__implement_style__', '<!--Implemented Styling--><link rel="stylesheet" href="/'+path_name+'/css/bootstrap.min.css">' +
+                '    <link rel="stylesheet" href="/'+path_name+'/css/style.css">')
 
             // Inject the Client IP
             const result = res.replace("__implement-ip__", req.headers["cf-ip"] || req.ip);
