@@ -62,7 +62,7 @@ Below is a sample docker-compose.yml that gives an example of how Docker Compose
 version: "3.8"
 services:
   cdn-cgi-server:
-    image: akami-cdn-cgi-server:1.0.0.2
+    image: ghcr.io/akama-aka/akami-statuspage:development
     environment:
       - VERSION=1.0.0.2
       - SERVER_PORT=8080
