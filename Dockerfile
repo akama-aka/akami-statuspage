@@ -16,4 +16,4 @@ WORKDIR /opt/server
 COPY --chown=node:node ./ /opt/server
 RUN npm i
 EXPOSE $SERVER_PORT
-CMD [ "/usr/bin/fastify start server.js -p 8089 -a 127.0.0.1 -l debug"]
+CMD [ "npm", "run","server"]
