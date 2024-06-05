@@ -47,6 +47,9 @@ module.exports = async function (fastify, opts) {
     fastify.get("/akami-cgi/:code", (req, rep) => {
         let fn;
         switch (req.params.code) {
+            case "403":
+                fn = "accessForbidden.html";
+                break;
             case "404":
                 fn = "pageNotFound.html";
                 break;
