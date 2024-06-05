@@ -26,6 +26,7 @@ The system utilizes the following environment variables:
 * `SERVER_HOSTNAME` - represents the hostname for the server.
 * `SERVER_LOG_LEVEL` - determines the log level used by the server.
 * `PATH_IDENTIFIER` - indicates the path name in the URL for which requests will be redirected to this server.
+* `REDIS_HOST` - The hostname of your Redis Server
 
 ## Installation and setup
 
@@ -69,8 +70,21 @@ services:
       - SERVER_HOSTNAME=127.0.0.1
       - SERVER_LOG_LEVEL=info
       - PATH_IDENTIFIER=akami-cgi
-    ports: 
-      - 8080:8080  
+      - REDIS_HOST=redis-server
+    ports:
+      - 8080:8080
+    depends_on:
+      redis-server:
+        condition: service_started
+        required: true
+  redis-server:
+    image: redis:7.2.4-alpine
+    ports:
+      - :6379
+    restart: always
+    healthcheck:
+      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
+
 ```
 To start the Docker Compose stack use this command:
 ```shell
