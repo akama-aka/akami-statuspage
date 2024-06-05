@@ -1,6 +1,7 @@
 'use strict'
 const {createReadStream,readFile} = require('node:fs');
 const {join,basename,normalize,resolve } = require("node:path");
+const {getCache, setCache} = require("./middleware/redis-connector");
 require('dotenv').config();
 module.exports = async function (fastify, opts) {
     let path_name = process.env.PATH_IDENTIFIER;
@@ -43,9 +44,12 @@ module.exports = async function (fastify, opts) {
         const stream = createReadStream(join(__dirname, '/assets/js/'+req.params.asset), 'utf8');
         rep.header("Content-Type", "application/javascript").send(stream || null);
     })
-    fastify.get("/akami-cgi/:code", (req, rep) => {
+    fastify.get(`/${path_name}/status/:code`, (req, rep) => {
         let fn;
         switch (req.params.code) {
+            case "403":
+                fn = "accessForbidden.html";
+                break;
             case "404":
                 fn = "pageNotFound.html";
                 break;
@@ -93,5 +97,51 @@ module.exports = async function (fastify, opts) {
                 "X-Powered-By": "A DNS System by Akami Solutions"
             }).send(result);
         });
+    })
+    fastify.get(`/${path_name}/xray`, async (req, rep) => {
+        // Resolve the IP Country
+        const options = {method: 'GET', headers: {'User-Agent': 'insomnia/8.3.0'}};
+        let ip = req.headers["Cf-Connecting-Ip"] || req.headers["x-forwarded-for"] || req.headers["cf-pseudo-ipv4"] || req.ip;
+        let ttl = 7884000000; // 3 Monate
+        let val = await getCache(ip);
+        const rayResponse = function (response) {
+            return `Host=${req.headers[":authority"] || req.headers["host"]}\nrequest=${req.headers["cf-ray"] || req.id}\nip=${ip}\ncountry=${response["data"]["located_resources"][0]["locations"][0]["country"]} # IP resolution by RIPE DB & MaxMind`
+        }
+        const rayResponseLocal = `Host=${req.headers["host"]}\nRequest ID: ${req.headers["cf-ray"] || req.id}\nIP: ${ip}\nCountry: Local IP`;
+        if (!val) {
+            return await fetch('https://stat.ripe.net/data/maxmind-geo-lite/data.json?resource=' + ip, options)
+                .then(response => response.json())
+                .then(response => {
+                    if (response && response["data"]["located_resources"].length > 0) {
+                        return setCache(ip, response, ttl).then((r) => {
+                            if (r.error) {
+                                fastify.log.error(r.error);
+                                return rep.headers("Content-Type", "text/plain").code(500).send("Internal Server Error");
+                            }
+                            return rep.headers("Content-Type", "text/plain").code(200).send(rayResponse(response))
+                        }).catch((err) => {
+                            fastify.log.error(err);
+                            return rep.headers("Content-Type", "text/plain").code(500).send("Internal Server Error");
+                        });
+                    } else {
+                        return setCache(ip, response, ttl).then((r) => {
+                            if (r.error) {
+                                fastify.log.error(r.error);
+                            }
+                            return rep.headers("Content-Type", "text/plain").code(200).send(rayResponseLocal);
+                        }).catch((err) => {
+                            fastify.log.error(err);
+                            return rep.headers("Content-Type", "text/plain").code(500).send("Internal Server Error");
+                        });
+                    }
+                }).catch(err => fastify.log.error(err));
+        } else {
+            const response = await JSON.parse(val);
+            if (response && response["data"]["located_resources"].length > 0) {
+                return rep.headers("Content-Type", "text/plain").code(200).send(rayResponse(response));
+            } else {
+                return rep.headers("Content-Type", "text/plain").code(200).send(rayResponseLocal);
+            }
+        }
     })
 }
