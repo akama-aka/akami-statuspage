@@ -44,7 +44,7 @@ module.exports = async function (fastify, opts) {
         const stream = createReadStream(join(__dirname, '/assets/js/'+req.params.asset), 'utf8');
         rep.header("Content-Type", "application/javascript").send(stream || null);
     })
-    fastify.get("/akami-cgi/:code", (req, rep) => {
+    fastify.get(`/${path_name}/status/:code`, (req, rep) => {
         let fn;
         switch (req.params.code) {
             case "403":
