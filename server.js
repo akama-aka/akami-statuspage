@@ -1,6 +1,7 @@
 'use strict'
 const {createReadStream,readFile} = require('node:fs');
 const {join,basename,normalize,resolve } = require("node:path");
+const {getCache, setCache} = require("./middleware/redis-connector");
 require('dotenv').config();
 module.exports = async function (fastify, opts) {
     let path_name = process.env.PATH_IDENTIFIER;
@@ -94,4 +95,16 @@ module.exports = async function (fastify, opts) {
             }).send(result);
         });
     })
+        let ttl = 7884000000; // 3 Monate
+        let val = await getCache(ip);
+                        return setCache(ip, response, ttl).then((r) => {
+                        return setCache(ip, response, ttl).then((r) => {
+                            if (r.error) {
+                                fastify.log.error(r.error);
+                            }
+                            return rep.headers("Content-Type", "text/plain").code(200).send(rayResponseLocal);
+                        }).catch((err) => {
+                            fastify.log.error(err);
+                            return rep.headers("Content-Type", "text/plain").code(500).send("Internal Server Error");
+                        });
 }
