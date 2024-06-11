@@ -82,7 +82,7 @@ module.exports = async function (fastify, opts) {
                 console.error(err);
             }
             // Inject the CloudFlare Ray ID
-            let res = data.replace("__implement-ray-id__", req.headers["cf-ray"] || req.headers["X-Amz-Cf-Id"] || req.headers["akamai-x-get-request-id"] || req.id);
+            let res = data.replace("__implement-ray-id__", req.headers["cf-ray"] || req.headers["X-Amz-Cf-Id"] || req.headers["akamai-x-get-request-id"] || req.headers["x-appengine-request-log-id"] || req.headers["requestId"] || req.headers["opc-request-id"] || req.id);
             // Inject the JavaScript Sources at the bottom of the Body
             res = res.replace('__implement_body_script__', '<!--Implement Body Scripts--><script src="/'+path_name+'/js/bootstrap.bundle.min.js"></script>');
             // Inject the Styling
