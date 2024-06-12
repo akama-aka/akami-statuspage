@@ -1,4 +1,4 @@
-FROM node:21-alpine
+FROM node:current-alpine3.19
 LABEL authors="Akama Aka"
 LABEL org.opencontainers.image.licenses="CC-BY-NC-ND 4.0"
 ENV VERSION=1.0.0.2 \
