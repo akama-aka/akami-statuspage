@@ -3,6 +3,11 @@ const {createReadStream,readFile} = require('node:fs');
 const {join,basename,normalize,resolve } = require("node:path");
 const {getCache, setCache} = require("./middleware/redis-connector");
 require('dotenv').config();
+let defaultHeader = {
+    "Server": "Akami Solutions",
+    "X-Powered-By": "A DNS System by Akami Solutions",
+    "Cache-Control": "private, max-age=2592000"
+}
 module.exports = async function (fastify, opts) {
     let path_name = process.env.PATH_IDENTIFIER;
     await fastify.register(require('@fastify/middie'))
@@ -25,7 +30,10 @@ module.exports = async function (fastify, opts) {
             rep.status(403).send('Forbidden');
         } else {
             const stream = createReadStream(filePath, 'utf8');
-            rep.header("Content-Type", "text/css").send(stream || null);
+            rep.headers({
+                "Content-Type": "text/css",
+                "Cache-Control": "public, max-age=2592000"
+            }).send(stream || null);
         }
     })
     fastify.get(`/${path_name}/fonts/:asset`, (req, rep) => {
@@ -34,7 +42,10 @@ module.exports = async function (fastify, opts) {
             return false;
         }
         const stream = createReadStream(path.join(__dirname, '/assets/fonts/'+req.params.asset), 'utf8');
-        rep.header("Content-Type", "font/ttf").send(stream || null);
+        rep.headers({
+            "Content-Type": "font/ttf",
+            "Cache-Control": "public, max-age=2592000"
+        }).send(stream || null);
     })
     fastify.get(`/${path_name}/js/:asset`, (req, rep) => {
         const reg = /\.js$/.test(req.params.asset)
@@ -42,7 +53,10 @@ module.exports = async function (fastify, opts) {
             return false;
         }
         const stream = createReadStream(join(__dirname, '/assets/js/'+req.params.asset), 'utf8');
-        rep.header("Content-Type", "application/javascript").send(stream || null);
+        rep.headers({
+            "Content-Type": "application/javascript",
+            "Cache-Control": "public, max-age=2592000"
+        }).send(stream || null);
     })
     fastify.get(`/${path_name}/status/:code`, (req, rep) => {
         let fn;
@@ -96,6 +110,7 @@ module.exports = async function (fastify, opts) {
                 "Server": "Akami Solutions",
                 "X-Powered-By": "A DNS System by Akami Solutions"
             }).send(result);
+            rep.headers(defaultHeader).send(result);
         });
     })
     fastify.get(`/${path_name}/xray`, async (req, rep) => {
