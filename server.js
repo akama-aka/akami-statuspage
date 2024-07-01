@@ -82,7 +82,7 @@ module.exports = async function (fastify, opts) {
                 console.error(err);
             }
             // Inject the CloudFlare Ray ID
-            let res = data.replace("__implement-ray-id__", req.headers["cf-ray"] || req.headers["X-Amz-Cf-Id"] || req.headers["akamai-x-get-request-id"] || req.headers["x-appengine-request-log-id"] || req.headers["requestId"] || req.headers["opc-request-id"] || req.id);
+            let res = data.replace("__implement-ray-id__", req.headers["cf-ray"] || req.headers["cdn-requestid"] || req.headers["X-Amz-Cf-Id"] || req.headers["akamai-x-get-request-id"] || req.headers["x-appengine-request-log-id"] || req.headers["requestId"] || req.headers["opc-request-id"] || req.id);
             // Inject the JavaScript Sources at the bottom of the Body
             res = res.replace('__implement_body_script__', '<!--Implement Body Scripts--><script src="/'+path_name+'/js/bootstrap.bundle.min.js"></script>');
             // Inject the Styling
@@ -105,9 +105,9 @@ module.exports = async function (fastify, opts) {
         let ttl = 7884000000; // 3 Monate
         let val = await getCache(ip);
         const rayResponse = function (response) {
-            return `Host=${req.headers[":authority"] || req.headers["host"]}\nrequest=${req.headers["cf-ray"] || req.id}\nip=${ip}\ncountry=${response["data"]["located_resources"][0]["locations"][0]["country"]} # IP resolution by RIPE DB & MaxMind`
+            return `Host=${req.headers[":authority"] || req.headers["host"]}\nrequest=${req.headers["cf-ray"] || req.headers["cdn-requestid"] || req.id}\nip=${ip}\ncountry=${response["data"]["located_resources"][0]["locations"][0]["country"]} # IP resolution by RIPE DB & MaxMind`
         }
-        const rayResponseLocal = `Host=${req.headers["host"]}\nRequest ID: ${req.headers["cf-ray"] || req.id}\nIP: ${ip}\nCountry: Local IP`;
+        const rayResponseLocal = `Host=${req.headers["host"]}\nRequest ID: ${req.headers["cf-ray"] || req.headers["cdn-requestid"] || req.id}\nIP: ${ip}\nCountry: Local IP`;
         if (!val) {
             return await fetch('https://stat.ripe.net/data/maxmind-geo-lite/data.json?resource=' + ip, options)
                 .then(response => response.json())
