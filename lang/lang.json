@@ -1,0 +1,188 @@
+{
+  "en-en": {
+    "client": "Client",
+    "networking": "Networking",
+    "subtitle1": "What happened?",
+    "subtitle2": "What you can do?",
+    "requestId": "Request ID:",
+    "ipAddress": "IP Address:",
+    "database": "Database",
+    "301": {
+      "title": "Moved Permanently, Trail the New Path",
+      "text1": "Bumped into a \"Moved Permanently\" (301)? It's like heading to your usual coffee shop only to find a sign saying they've moved. Time to change your GPS destination (check the new URL or ask the website's support for directions).",
+      "text2": "Seeing a \"Moved Permanently\" (301) is like trying to find a shop that's changed locations. The establishment you were looking for has moved to a new address (URL). Check the new address or talk to the movers (the support team) to find the shop's new home."
+    },
+    "304": {
+      "title": "Not Modified, You're Up-To-Date",
+      "text1": "Dealing with a \"Not Modified\" (304)? Imagine refreshing your news feed only to find no new posts. The web page hasn't changed since your last visit, so your cached copy is still valid. Go on, hang tight & save those data bytes.",
+      "text2": "Runs into \"Not Modified\" (304)? It's like flipping to a favorite channel and seeing a re-run of a show you've already seen. The webpage content hasn't updated since your last visit. So, you can continue to use your cached version. Enjoy the rerun!"
+    },
+    "400": {
+      "title": "Oops! Bad Request",
+      "text1": "Wrestling with a \"Bad Request\" (400)? Picture dialing a phone number but accidentally pressing the wrong keys. Your browser sent a request that the server didn't understand. Double-check your input or consult with the operator (contact the support team)!",
+      "text2": "Encountering a \"Bad Request\" (400) can feel like speaking an alien language to someone. The server didn't understand your request. Make sure you're speaking the same language (check your syntax or request format). If the confusion persist, ask for a translator's help (website's support team)."
+    },
+    "403": {
+      "title": "Uh oh! You're in Forbidden Territory",
+      "text1": "The \"Forbidden\" error (403) is like trying to walk into a private, ‘members only’ club without a membership card. You may have tried to access a page or perform a task you're not permitted to. Check your credentials, make sure you're not crossing any boundary lines, or touch base with the site's management for assistance.",
+      "text2": "It’s like trying to join a secret society. Hitting the \"Forbidden\" (403) sign means that you tried to peak into a restricted room. It seems the access to the secret treasure (or page) is locked. Try the key (user credentials) again, or ask the society's leader (the site admin) for help!"
+    },
+    "404": {
+      "title": "Eek! Page Not Found",
+      "text1": "The pesky \"404 Not Found\" is like reading a treasure map and finding no treasure. Could've been moved, or maybe we have the wrong map (URL). Try clearing your cache, or navigating from the home (main) page.",
+      "text2": "Seeing a 404 is kind of like looking for your socks and not finding them. Maybe they're in the laundry (clear your cache), or you're looking in the wrong drawer (check the URL). If all else fails, you might need to buy new socks (contact the administrator or look for your content elsewhere)."
+    },
+    "500": {
+      "title": "Uh oh! Internal Server Mix-Up",
+      "text1": "A \"500 Internal Server Error\" is like finding a mess inside a room, but not knowing who made it. The janitors (devs) are probably already cleaning up. Give 'em a moment and try later.",
+      "text2": "Getting a \"500 Internal Server Error\" can feel like trying to read a book in the dark. Your best light source might be refreshing the page, clearing your cache, or coming back later."
+    },
+    "502": {
+      "title": "Oops! Bad Gateway Ahead",
+      "text1": "Encountering a \"502 Bad Gateway\" is like knocking on a door and getting no answer. Try knocking again (refreshing the page) or maybe clean your shoes (clear your browser's cache) before the next visit. If no one's answering, they might be busy fixing some issues inside. Try again later or ring up the site's support team!",
+      "text2": "Facing a \"502 Bad Gateway\" can feel like being stuck behind a road closure. Try turning around (refreshing the page), or clearing the road (your browser's cache). If the road remains closed, it could be under repair. Your best bet may be to return later or reach out to the responsible highway department (the website's support team)."
+    },
+    "503": {
+      "title": "Hang Tight, Service Unavailable",
+      "text1": "With an off-stage \"503 Service Unavailable\", think of the website like a theater with a closed curtain. They're just setting up the stage for the next act. Freshen up (try a refresh) or come back in a while.",
+      "text2": "Encountering a \"503 Service Unavailable\" is like waiting in line for a rollercoaster that's under maintenance. They're probably tightening the screws and oiling the tracks. Maybe use this break for a corn dog and try again later?"
+    },
+    "504": {
+      "title": "Server Says Timeout",
+      "text1": "A \"504 Gateway Timeout\"? Consider it as going to a fast-food joint where they aren't so fast. It might just be a lunch rush, or maybe the fryer's down. Give it a few, then press F5 or refresh. Still not fixing it? Could be time to contact the shop (website's support).",
+      "text2": "Facing a \"504 Gateway Timeout\" error can be as frustrating as being in a slow-moving checkout queue. Try refreshing the page or come back in a while. If the line continues to move slowly, reach out to the store manager (website's support)."
+    },
+    "1000": {
+      "title": "Access Blocked! No Direct Entry",
+      "text1": "The \"Direct Access Forbidden\" error is like a private party where only guests with invitations are allowed. Your direct attempt to visit was turned away at the door because your name (IP address) is not on the list. Try entering through the main gate (appropriate domain or URL), or discuss with the event organizer (website's support).",
+      "text2": "Hitting the \"Direct Access Forbidden\" wall is just like trying to enter a club without a VIP pass. You tried to get in directly, but the bouncer (server) said, 'No admission without domain entry!' Ensure you're entering via the front door (using the correct URL or intended path) and not the staff entrance (direct IP). If all else fails, consider having a chat with the club's manager (website's support)!"
+    },
+    "1001": {
+      "title": "Database Unavailable",
+      "text1": "Running into \"Service Unavailable\" is like going to a library, only to find it temporarily closed for inventory check. The database, our digital librarian, is currently unavailable, perhaps busy with a network hiccup, a rest period or overly crowded with requests. Our technicians, eager as bookworms, are on the case. We appreciate your understanding.",
+      "text2": "A closed library door, that's what a \"Database Error\" feels like. But don't worry, it might just be a quick clean-up or rearrangement of shelves. Try refreshing the page or come back in a while. If the door still won't budge, reach out to the town hall (our support) and we'll sort this out."
+    }
+  },
+  "de-de": {
+    "client": "Klient",
+    "networking": "Netzwerk",
+    "subtitle1": "Was ist passiert?",
+    "subtitle2": "Was kannst du tun?",
+    "requestId": "Anfrage-ID:",
+    "ipAddress": "IP-Adresse:",
+    "database": "Datenbank",
+    "301": {
+      "title": "Dauerhaft verschoben, verfolge den neuen Pfad",
+      "text1": "Du bist auf einen \"Dauerhaft verschoben\" (301) Fehler gestoßen? Das ist so, als würdest du zu deinem üblichen Café gehen, nur um festzustellen, dass es umgezogen ist. Es ist Zeit, dein GPS-Ziel zu ändern (überprüfe die neue URL oder frage den Support der Webseite nach Anweisungen).",
+      "text2": "Wenn du einen \"Dauerhaft verschoben\" (301) Fehler siehst, ist das so, als würdest du versuchen, ein Geschäft zu finden, das den Standort gewechselt hat. Das Geschäft, das du gesucht hast, ist an eine neue Adresse (URL) umgezogen. Überprüfe die neue Adresse oder sprich mit den Umzugshelfern (dem Support-Team), um das neue Zuhause des Geschäftes zu finden."
+    },
+    "304": {
+      "title": "Nicht verändert, du bist auf dem neuesten Stand",
+      "text1": "Du hast mit einem \"Nicht verändert\" (304) Fehler zu tun? Stelle dir vor, du aktualisierst deinen News-Feed und findest keine neuen Beiträge. Die Webseite hat sich seit deinem letzten Besuch nicht verändert, daher ist deine zwischengespeicherte Kopie immer noch gültig. Mach weiter, halte durch und spare diese Datenbits.",
+      "text2": "Triffst du auf einen \"Nicht verändert\" (304) Fehler? Das ist so, als würdest du zu einem Lieblingskanal umschalten und eine Wiederholung einer bereits gesehenen Show sehen. Der Inhalt der Webseite hat sich seit deinem letzten Besuch nicht aktualisiert. Daher kannst du weiterhin deine zwischengespeicherte Version verwenden. Genieße die Wiederholung!"
+    },
+    "400": {
+      "title": "Hoppla! Schlechte Anfrage",
+      "text1": "Du kämpfst mit einer \"Schlechte Anfrage\" (400)? Stelle dir vor, du wählst eine Telefonnummer, drückst aber versehentlich die falschen Tasten. Dein Browser hat eine Anforderung gesendet, die der Server nicht verstanden hat. Überprüfe deine Eingabe doppelt oder konsultiere den Betreiber (kontaktiere das Support-Team)!",
+      "text2": "Begegnest du einer \"Schlechte Anfrage\" (400), ist das so, als würdest du eine fremde Sprache zu jemandem sprechen. Der Server hat deine Anforderung nicht verstanden. Stelle sicher, dass du die gleiche Sprache sprichst (überprüfe deine Syntax oder das Format deiner Anfrage). Wenn die Verwirrung weiterhin besteht, frage nach Hilfe eines Übersetzers (Support-Team der Website)."
+    },
+    "403": {
+      "title": "Uh oh! Du bist in verbotenem Gebiet",
+      "text1": "Der \"Verboten\" Fehler (403) tritt auf, wenn du versuchst, in einen privaten, nur für Mitglieder zugänglichen Club zu gehen, ohne eine Mitgliedskarte zu haben. Du hast vielleicht versucht, auf eine Seite zuzugreifen oder eine Aufgabe auszuführen, die dir nicht erlaubt ist. Überprüfe deine Anmeldedaten, stelle sicher, dass du keine Grenzen überschreitest, oder setze dich mit der Leitung der Website in Verbindung, um Hilfe zu erhalten.",
+      "text2": "Es ist wie der Versuch, einer Geheimgesellschaft beizutreten. Das Auftreten des \"Verboten\" (403) Schildes bedeutet, dass du versucht hast, in einen abgesperrten Raum zu schauen. Es scheint, dass der Zugang zum geheimen Schatz (oder zur Seite) gesperrt ist. Versuche den Schlüssel (Benutzerdaten) erneut oder frage den Leiter der Gesellschaft (den Administrator der Website) um Hilfe!"
+    },
+    "404": {
+      "title": "Eek! Seite nicht gefunden",
+      "text1": "Der lästige \"Nicht gefunden\" (404) Fehler tritt auf, wenn du eine Schatzkarte liest und keinen Schatz findest. Könnte verschoben worden sein, oder vielleicht haben wir die falsche Karte (URL). Versuche, deinen Cache zu löschen oder navigiere von der Hauptseite.",
+      "text2": "Einen 404-Fehler zu sehen, ist so, als würde man nach seinen Socken suchen und sie nicht finden. Vielleicht sind sie in der Wäsche (lösche deinen Cache), oder du suchst in der falschen Schublade (überprüfe die URL). Wenn alles andere scheitert, musst du vielleicht neue Socken kaufen (kontaktiere den Administrator oder suche deinen Inhalt woanders)."
+    },
+    "500": {
+      "title": "Uh oh! Interner Server Durcheinander",
+      "text1": "Ein \"500 Interner Serverfehler\" ist wie eine Unordnung in einem Raum zu finden, ohne zu wissen, wer sie verursacht hat. Die Reinigungskräfte (Entwickler) sind wahrscheinlich schon dabei, aufzuräumen. Gib ihnen ein Moment und versuche es später.",
+      "text2": "Ein \"500 Interner Serverfehler\" zu bekommen, kann sich so anfühlen, als würde man versuchen, ein Buch im Dunkeln zu lesen. Deine beste Lichtquelle könnte das Aktualisieren der Seite, das Löschen deines Caches oder das Später-Wiederkommen sein."
+    },
+    "502": {
+      "title": "Hoppla! Schlechtes Gateway voraus",
+      "text1": "Beim Auftreten eines \"502 Schlechtes Gateway\" Fehlers ist es, als würdest du an eine Tür klopfen und keine Antwort erhalten. Versuche, noch einmal zu klopfen (aktualisiere die Seite) oder vielleicht deine Schuhe zu säubern (lösche den Cache deines Browsers), bevor du den nächsten Besuch machst. Wenn niemand antwortet, sind sie vielleicht damit beschäftigt, einige Probleme im Inneren zu beheben. Versuche es später erneut oder rufe das Support-Team der Seite an!",
+      "text2": "Einem \"502 Schlechtes Gateway\" Fehler zu begegnen, kann sich anfühlen, als würde man hinter einer Straßensperre feststecken. Versuche, umzudrehen (aktualisiere die Seite), oder die Straße frei zu machen (den Cache deines Browsers zu löschen). Wenn die Straße weiterhin geschlossen bleibt, könnte sie repariert werden. Deine beste Wahl könnte sein, später zurückzukehren oder sich an die zuständige Autobahnbehörde (das Support-Team der Website) zu wenden."
+    },
+    "503": {
+      "title": "Bleib dran, Dienst nicht verfügbar",
+      "text1": "Bei einem nicht vorhandenen \"503 Service nicht verfügbar\", denke an die Webseite wie an ein Theater mit geschlossenem Vorhang. Sie stellen gerade die Bühne für den nächsten Akt auf. Frische dich auf (versuche eine Aktualisierung) oder komm später wieder.",
+      "text2": "Beim Auftreten eines \"503 Service nicht verfügbar\" Fehlers ist es, als würde man in der Reihe für eine Achterbahn warten, die sich in Wartung befindet. Wahrscheinlich ziehen sie gerade die Schrauben fest und ölen die Spuren. Vielleicht nutzt du diese Pause für einen Hotdog und versuchst es später nochmal?"
+    },
+    "504": {
+      "title": "Server meldet Zeitüberschreitung",
+      "text1": "Ein \"504 Gateway Timeout\"? Betrachte es so, als würdest du in ein Fast-Food-Restaurant gehen, wo es nicht so schnell geht. Es könnte gerade Stoßzeit sein oder vielleicht ist die Fritteuse ausgefallen. Warte ein wenig, dann drücke F5 oder aktualisiere. Behebt das immer noch nicht das Problem? Dann könnte es an der Zeit sein, den Shop (den Support der Website) zu kontaktieren.",
+      "text2": "Einem \"504 Gateway Timeout\" Fehler zu begegnen kann so frustrierend sein, wie in einer langsam bewegenden Kassenschlange zu stehen. Versuche, die Seite zu aktualisieren oder komme in einer Weile zurück. Wenn die Schlange sich weiterhin langsam bewegt, wende dich an den Filialleiter (den Support der Website)."
+    },
+    "1000": {
+      "title": "Zugriff blockiert! Kein direkter Eintritt",
+      "text1": "Der Fehler \"Direkter Zugriff verboten\" ist wie eine private Party, zu der nur Gäste mit Einladung zugelassen sind. Dein direkter Versuch, den Besuch wurde an der Tür abgewiesen, weil dein Name (IP-Adresse) nicht auf der Liste stand. Versuche, durch das Haupttor (geeignete Domain oder URL) einzutreten, oder spreche mit dem Veranstalter (Support der Website).",
+      "text2": "Auf die \"Direkter Zugriff verboten\" Mauer zu stoßen ist so, als würde man versuchen, einen Club ohne VIP-Pass zu betreten. Du hast versucht, direkt reinzukommen, aber der Türsteher (Server) sagte: 'Kein Eintritt ohne Domain-Eingang!' Stelle sicher, dass du durch die Vordertür (mit der korrekten URL oder dem vorgesehenen Pfad) eintrittst und nicht durch den Personaleingang (direkte IP). Falls alles andere fehlschlägt, erwäge ein Gespräch mit dem Clubmanager (Support der Webseite)!"
+    },
+    "1001": {
+      "title": "Datenbank nicht verfügbar",
+      "text2": "Eine geschlossene Bibliothekstür, so fühlt sich ein \"Datenbankfehler\" an. Aber keine Sorge, es könnte nur eine schnelle Reinigung oder Neuordnung der Regale sein. Versuche, die Seite zu aktualisieren oder komme in einer Weile wieder. Wenn die Tür immer noch verschlossen ist, wende dich an das Rathaus (unser Support), und wir werden das klären."
+    }
+  },
+  "de-at": {
+    "client": "Kunde",
+    "networking": "Netzwerk",
+    "subtitle1": "Wos is passiert?",
+    "subtitle2": "Wos kannst du tun?",
+    "requestId": "Anfrage-ID:",
+    "ipAddress": "IP Adresse:",
+    "database": "Datenbank",
+    "301": {
+      "title": "Permanent umzogn, geh da neuen Weg",
+      "text1": "Du bist auf einen \"Permanent umzogn\" (301) Fehler gestoßn? Stell da voa, du gehst zu deinem Lieblingscafé und findest ein Schild, dass sie umgezogn san. Zeit, dass du dein Navi nei adjustierst (schau die neue URL an oder frag den Webseiten-Support nach wegweisungen).",
+      "text2": "Mit einem \"Permanent umzogn\" (301) konfrontiert zu werdn is wie a Gschäft zu suchn, des umzogn is. Das Geschäft, das du gsucht hast, is zu ner neichn Adresse (URL) umzogn. Guad is, wannst die neue Adresse nachschaugst oder redst mit die Umzugshelfer (die Supportmitarbeiter) ums neue Geschäft zu findn."
+    },
+    "304": {
+      "title": "Nix Neichs, alles beim Alten",
+      "text1": "Ein \"304 Nicht geändert\" Fehler is wie wennst zu deinem Lieblings-Wirtshaus gehst und sie immer noch dasselbe Menü haben. Deine Anfrage war erfolgreich, aber es gibt nix Neichs zur letzten Anfrage. Mach dir ka Sorgen, dein Browser wird einfach die bestehenden Daten verwenden.",
+      "text2": "Wennst a \"304 Nicht geändert\" Nachricht bekommst, dann is es so, als würdest du deinen Postkasten öffnen und finden, dass die Post noch nix Neichs geliefert hat. Du kriegst vielleicht die gleichen Nachrichten, die du vorhin schon bekommen hast. Da musst nicht nervös werden, dein Browser wird einfach die alten Meldungen nochmal ausgeben."
+    },
+    "400": {
+      "title": "Heast! Falsche Anfrage",
+      "text1": "Du kämpfst mit einer \"Falsche Anfrage\" (400)? Stell dir vor, du wählst a Telefonnummer, drückst aber aus Versehen die falschen Tasten. Dein Browser hat a Anforderung gesendet, die der Server net hat verstehen können. Überprüf deine Eingabe doppelt oder frag beim Betreiber (kontaktiere das Support-Team) nach!",
+      "text2": "Hasts a \"Falsche Anfrage\" (400) bekommen, fühlts sich an als würdest du mit jemandem in a fremder Sprache reden. Der Server hat deine Anfrage ned verstanden. Schau, dass ihr dieselbe Sprache redets (überprüfe deine Syntax oder das Format deiner Anfrage). Wenn die Verwirrung weiterhin besteht, frag nach Hilfe eines Übersetzers (Support-Team der Website)."
+    },
+    "403": {
+      "title": "Oje! Du bist im verbotenen Gebiet",
+      "text1": "Der \"Verboten\" Fehler (403), is wie wennst probierst, in an privaten, nur fia Mitglieder zugänglichen Club zu kommen, ohne an Ausweis. Vielleicht hast probiert, auf a Seite zuzugreifen oder a Aufgabe auszuführen, die dir ned erlaubt is. Überprüf deine Anmeldedaten, schau, dass du ka Grenzen überschreitst, oder meld dich beim Website's Management für Hilfe.",
+      "text2": "Hast das \"Verboten\" (403) Schild erwischt, hast wahrscheinlich probiert, in a abgesperrten Raum zu schauen. Zugang zum versteckten Schatz (oder zur Seite) is gesperrt. Probier den Schlüssel (Benutzerdaten) noch mal oder frag den Chef von der Gesellschaft (Website-Admin) um Hilfe!"
+    },
+    "404": {
+      "title": "Eieiei! Seite net gefunden",
+      "text1": "Der lästige \"Net gefunden\" (404) Fehler is wie a Schatzkarte zu lesen und ka Schatz zu finden. Könnt's verschoben worden sein, oder vielleicht haben wir die falsche Karte (URL). Versuch, deinen Cache zu leeren oder geh von da Hauptseite aus weiter.",
+      "text2": "A 404 zu sehen is so, als würdest du nach deinen Socken suchen und sie nicht finden. Vielleicht san sie in der Wäsche (leer deinen Cache), oder du suchst in der falschen Lade (überprüf die URL). Wenn alles andere fehlschlägt, musst vielleicht neue Socken kaufen (kontaktier den Administrator oder such dein Inhalt anderswo)."
+    },
+    "500": {
+      "title": "Autschn! Da is was schief gangen",
+      "text1": "Du erlebst an \"500 Interner Server Fehler\"? Is wie wennst zu an Kirtag gehst und zufällig das Riesenrad kaputt is. Unsere Maschinerie (der Server) hat a Problem und wir wissen noch net genau was. Unsere besten Mechaniker (Website-Techniker) arbeiten aber schon dran.",
+      "text2": "Mit einem \"500 Interner Server Fehler\" knackt die Glückssträhne leider. Is wie wennst das Gewinnlos kaufst und dann feststellst, dass der Hauptpreis ein kaputts Riesenrad is. Jedenfalls is unsere Maschine (Server) grad stecken geblieben. Aber mach dir ka Sorgen, die besten Mechaniker der Stadt (unsere IT-Abteilung) sind schon dran."
+    },
+    "503": {
+      "title": "Bedienung net verfügbar, wir machen Pause",
+      "text1": "Hast'n \"503 Service Unavailable\" erhalten? Anscheinend braucht unser Server (wie ein Kellner in der Mittagspause) kurz a Auszeit. Entweder is er überlastet oder wegen Wartung kurz offline. Versuche es später noch einmal.",
+      "text2": "Bekommen zu haben a \"503 Service Unavailable\" is wie wenn dein Lieblings-Wurstelstand gerade zuat is. Unser Server (Wurstelstand) is derzeit unerreichbar. Es könnt' sein, dass er gerade eine große Menge Bestellungen bewältigt oder eine Wartung durchführt. Komme bitte später wieder."
+    },
+    "504": {
+      "title": "Der Server braucht a bissl länger",
+      "text1": "Du hast an \"504 Gateway Timeout\" Fehler? Das is wie wennst in a Fast-Food-Lokal geht und es a bissal länger dauert. Vielleicht is gerade viel Betrieb oder die Fritter ist kaputt. Wart a bissal und dann drück auf F5 oder aktualisiere die Seite. Hilft's immer noch net? Dann is's vielleicht Zeit, den Inhaber (Website-Support) zu kontaktieren.",
+      "text2": "A \"504 Gateway Timeout\" Fehler zu erleben kann so frustrierend sein, wie in a lange Schlange zu stehen, die sich kaum bewegt. Probier, die Seite zu aktualisieren oder dann später wieder zu schauen. Bewegt sich die Schlange immer noch langsam, sprich mit dem Manager (Website-Support)."
+    },
+    "1000": {
+      "title": "Zugang blockiert! Du kommst hier net rein",
+      "text1": "Der Fehler \"Direkter Zugang verboten\" is wie a private Party, wo nur Leut mit Einladung hin dürfen. Dein Versuch, direkt hin zu kommen, is an der Türe abgelehnt worden, weilst net auf der Liste warst (deine IP-Adresse). Probier's durch's Haupthaus (richtige Domain oder URL), oder sprich mit'm Gastgeber (Website-Support).",
+      "text2": "Mit'm \"Direkter Zugang verboten\" Schild daran zustoßen is wie zu versuchen, in a Disco ohne VIP-Pass zu gehen. Du hast versucht, direkt rein zu kommen, aber der Türsteher (Server) hat gsagt: 'Ohne Domain-Einlass, kein Zutritt!' Stell sicher, dass du durch die Haustür (richtige URL oder vorgesehener Weg) reingehst und nicht durch den Dienst-Eingang (direkte IP). Wenn alles scheitert, überleg dir, ob'd mit'm Club-Manager (Website-Support) reden willst!"
+    },
+    "1001": {
+      "title": "Datenbank is grad net da",
+      "text1": "Bekommst'n \"Dienst net verfügbar\" Fehler, is's wie wennst zur Bücherei willst und die zusperren, weil's grad das Inventar überprüfen. Die Datenbank, unser digitaler Bibliothekar, is grad net da. Könnt a Netzwerkproblem sein, oder die is überlastet. Unsere Techniker sind schon dran. Wir danken dir für dein Verständnis.",
+      "text2": "A geschlossene Büchereitüre, so fühlt sich an \"Datenbankfehler\" an. Aber mach dir ka Sorgen, könnt' nur a schnelle Reinigung oder eine Neuordnung der Bücher sein. Versuch, die Seite zu aktualisieren oder komm später wieder. Wenn die Tür immer noch zu is, wende dich ans Gemeindeamt (unser Support), und wir klären das."
+    }
+  }
+}
