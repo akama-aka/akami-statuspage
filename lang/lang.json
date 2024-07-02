@@ -184,5 +184,69 @@
       "text1": "Bekommst'n \"Dienst net verfügbar\" Fehler, is's wie wennst zur Bücherei willst und die zusperren, weil's grad das Inventar überprüfen. Die Datenbank, unser digitaler Bibliothekar, is grad net da. Könnt a Netzwerkproblem sein, oder die is überlastet. Unsere Techniker sind schon dran. Wir danken dir für dein Verständnis.",
       "text2": "A geschlossene Büchereitüre, so fühlt sich an \"Datenbankfehler\" an. Aber mach dir ka Sorgen, könnt' nur a schnelle Reinigung oder eine Neuordnung der Bücher sein. Versuch, die Seite zu aktualisieren oder komm später wieder. Wenn die Tür immer noch zu is, wende dich ans Gemeindeamt (unser Support), und wir klären das."
     }
+  },
+  "nl": {
+    "client": "Cliënt",
+    "networking": "Netwerken",
+    "subtitle1": "Wat is er gebeurd?",
+    "subtitle2": "Wat kun je doen?",
+    "requestId": "Verzoek-ID:",
+    "ipAddress": "IP-adres:",
+    "database": "Database",
+    "301": {
+      "title": "Permanent Verplaatst, Volg het Nieuwe Pad",
+      "text1": "Een 'Permanent Verplaatst' (301) tegengekomen? Het is alsof je naar je gebruikelijke koffieshop gaat en een bordje ziet dat ze verhuisd zijn. Tijd om je GPS-bestemming te wijzigen (controleer de nieuwe URL of vraag de support van de website om hulp).",
+      "text2": "Een 'Permanent Verplaatst' (301) zien is als proberen een winkel te vinden die van locatie is veranderd. De zaak die je zocht is naar een nieuw adres (URL) verhuisd. Controleer het nieuwe adres of praat met de verhuizers (het supportteam) om de nieuwe locatie te vinden."
+    },
+    "304": {
+      "title": "Niet Gewijzigd, Je Bent Up-to-Date",
+      "text1": "Heb je te maken met een 'Niet Gewijzigd' (304)? Stel je voor dat je je nieuwsfeed ververst en geen nieuwe berichten vindt. De webpagina is sinds je laatste bezoek niet veranderd, dus je cachekopie is nog steeds geldig. Ga door, blijf rustig en bespaar die databytes.",
+      "text2": "Komt een 'Niet Gewijzigd' (304) tegen? Het is als naar je favoriete zender schakelen en een herhaling van een programma zien dat je al hebt gezien. De inhoud van de webpagina is sinds je laatste bezoek niet bijgewerkt. Je kunt je gecachte versie blijven gebruiken. Geniet van de herhaling!"
+    },
+    "400": {
+      "title": "Oeps! Slechte Verzoek",
+      "text1": "Een 'Slechte Verzoek' (400) aan het uitvechten? Stel je voor dat je een telefoonnummer belt maar per ongeluk de verkeerde toetsen indrukt. Je browser heeft een verzoek gestuurd dat de server niet begreep. Controleer je invoer dubbel of raadpleeg de operator (neem contact op met het supportteam)!",
+      "text2": "Een 'Slechte Verzoek' (400) tegenkomen kan voelen als een buitenaardse taal spreken tegen iemand. De server begreep je verzoek niet. Zorg ervoor dat je dezelfde taal spreekt (controleer je syntax of verzoekformaat). Als de verwarring aanhoudt, vraag om hulp van een vertaler (het supportteam van de website)."
+    },
+    "403": {
+      "title": "Uh oh! Je bevindt je in Verboden Gebied",
+      "text1": "De 'Verboden' fout (403) is als proberen een privé, 'leden alleen' club binnen te lopen zonder lidmaatschapskaart. Je hebt mogelijk geprobeerd een pagina te openen of een taak uit te voeren die je niet bent toegestaan. Controleer je inloggegevens, zorg ervoor dat je geen grens overschrijdt, of neem contact op met het sitebeheer voor hulp.",
+      "text2": "Het is als proberen lid te worden van een geheime samenleving. Tegen het 'Verboden' (403) bord aanlopen betekent dat je probeerde in een beperkte ruimte te gluren. Het lijkt erop dat de toegang tot de geheime schat (of pagina) is vergrendeld. Probeer de sleutel (gebruikersgegevens) opnieuw, of vraag de leider van de samenleving (de sitebeheerder) om hulp!"
+    },
+    "404": {
+      "title": "Oei! Pagina Niet Gevonden",
+      "text1": "De vervelende '404 Niet Gevonden' is als een schatkaart lezen en geen schat vinden. Het kan zijn verplaatst, of misschien hebben we de verkeerde kaart (URL). Probeer je cache te wissen, of navigeer vanaf de homepagina.",
+      "text2": "Een 404 zien is een beetje als naar je sokken zoeken en ze niet vinden. Misschien zijn ze in de was (wis je cache), of zoek je in de verkeerde la (controleer de URL). Als alles mislukt, moet je misschien nieuwe sokken kopen (neem contact op met de beheerder of zoek je inhoud elders)."
+    },
+    "500": {
+      "title": "Uh oh! Interne Serverfout",
+      "text1": "Een '500 Interne Serverfout' is als een puinhoop in een kamer vinden, maar niet weten wie het heeft gemaakt. De schoonmakers (developers) zijn waarschijnlijk al aan het opruimen. Geef ze een moment en probeer het later opnieuw.",
+      "text2": "Een '500 Interne Serverfout' krijgen kan voelen als proberen een boek in het donker te lezen. Je beste lichtbron kan zijn om de pagina te verversen, je cache te wissen, of later terug te komen."
+    },
+    "502": {
+      "title": "Oeps! Slechte Netwerkpunt",
+      "text1": "Een '502 Slechte Netwerkpunt' tegenkomen is als kloppen op een deur en geen antwoord krijgen. Probeer opnieuw te kloppen (de pagina te verversen) of misschien je schoenen schoon te maken (wis de cache van je browser) voor het volgende bezoek. Als niemand antwoordt, zijn ze misschien bezig met het oplossen van problemen binnen. Probeer het later opnieuw of bel het supportteam van de site!",
+      "text2": "Een '502 Slechte Netwerkpunt' tegenkomen kan voelen als vastzitten achter een wegafsluiting. Probeer om te keren (de pagina te verversen), of de weg schoon te maken (de cache van je browser). Als de weg afgesloten blijft, kan het onder reparatie zijn. Je beste gok kan zijn om later terug te keren of contact op te nemen met de verantwoordelijke snelwegafdeling (het supportteam van de website)."
+    },
+    "503": {
+      "title": "Even Geduld, Service Niet Beschikbaar",
+      "text1": "Met een 'Service Niet Beschikbaar' (503), denk aan de website als een theater met een gesloten gordijn. Ze zijn gewoon het podium aan het klaarmaken voor de volgende act. Verfris jezelf (probeer een verversing) of kom later terug.",
+      "text2": "Een 'Service Niet Beschikbaar' (503) tegenkomen is als wachten in de rij voor een achtbaan die onderhoud nodig heeft. Ze zijn waarschijnlijk de schroeven aan het aandraaien en de rails aan het oliën. Misschien kun je deze pauze gebruiken voor een corn dog en later opnieuw proberen?"
+    },
+    "504": {
+      "title": "Server Time-out",
+      "text1": "Een '504 Gateway Time-out'? Beschouw het als naar een fastfoodtent gaan waar ze niet zo snel zijn. Het kan gewoon druk zijn, of misschien is de frituurpan kapot. Geef het even, druk dan op F5 of ververs. Lost het nog steeds niet op? Het kan tijd zijn om contact op te nemen met de winkel (het supportteam van de website).",
+      "text2": "Een '504 Gateway Time-out' fout tegenkomen kan zo frustrerend zijn als in een langzaam bewegende kassarij staan. Probeer de pagina te verversen of kom later terug. Als de rij langzaam blijft bewegen, neem contact op met de winkelmanager (het supportteam van de website)."
+    },
+    "1000": {
+      "title": "Toegang Geblokkeerd! Geen Directe Invoer",
+      "text1": "De 'Directe Toegang Verboden' fout is als een privéfeestje waar alleen gasten met uitnodigingen zijn toegestaan. Je directe poging om te bezoeken werd aan de deur afgewezen omdat je naam (IP-adres) niet op de lijst staat. Probeer via de hoofdingang (juiste domein of URL) binnen te komen, of bespreek het met de organisator (support van de website).",
+      "text2": "Tegen de 'Directe Toegang Verboden' muur aanlopen is net als proberen een club binnen te komen zonder VIP-pas. Je probeerde direct binnen te komen, maar de uitsmijter (server) zei: 'Geen toegang zonder domeininvoer!' Zorg ervoor dat je via de voordeur binnenkomt (gebruik de juiste URL of beoogd pad) en niet via de personeelsingang (direct IP). Als alles mislukt, overweeg dan om een gesprek te voeren met de manager van de club (support van de website)!"
+    },
+    "1001": {
+      "title": "Database Niet Beschikbaar",
+      "text1": "Een 'Service Niet Beschikbaar' tegenkomen is als naar een bibliotheek gaan, maar merken dat deze tijdelijk gesloten is voor een inventariscontrole. De database, onze digitale bibliothecaris, is momenteel niet beschikbaar, misschien vanwege een netwerkprobleem, een rustperiode of te veel verzoeken. Onze technici, gretig als boekenwurmen, zijn ermee bezig. We waarderen je begrip.",
+      "text2": "Een gesloten bibliotheekdeur, dat is wat een 'Databasefout' voelt als. Maar maak je geen zorgen, het kan gewoon een snelle schoonmaak of herinrichting van de planken zijn. Probeer de pagina te verversen of kom later terug. Als de deur nog steeds niet opengaat, neem contact op met het gemeentehuis (onze support) en we lossen het op."
+    }
   }
 }
