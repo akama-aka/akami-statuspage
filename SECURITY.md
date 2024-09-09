@@ -1,0 +1,64 @@
+# Bug Bounty Reporting Program provided by Aki Solutions
+
+This external project is related to Aki Solutions. 
+Due to the fact that Aki Solutions and Akama Aka are currently not generating any revenue and everything is financed with private income, we are unfortunately unable to offer any compensation in the form of money. However, we are always ready to support in other ways. 
+
+If you find a security gap, you can report it to us at any time:
+
+E-Mail: akama.aka@akami-solutions.cc
+PGP:
+```
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Comment: A6BF 90E5 B1C6 5DE4 C850 5AA9 FD64 C7D9 3F33 8AAF
+Comment: Akami Solutions Akama Aka <akama.aka@akami-solutions.cc
+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
+wEufjcXKKrlSL/DBFMEGVw==
+=emRq
+-----END PGP PUBLIC KEY BLOCK-----
+```
