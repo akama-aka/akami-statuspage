@@ -30,7 +30,7 @@ module.exports = async function (fastify, opts) {
             const stream = createReadStream(filePath, 'utf8');
             rep.headers({
                 "Content-Type": "text/css",
-                "Cache-Control": "public, max-age=2592000"
+                "Cache-Control": "public, max-age="+process.env.ASSETS_CACHE_TTL
             }).send(stream || null);
         }
     })
@@ -42,7 +42,7 @@ module.exports = async function (fastify, opts) {
         const stream = createReadStream(path.join(__dirname, '/assets/fonts/'+req.params.asset), 'utf8');
         rep.headers({
             "Content-Type": "font/ttf",
-            "Cache-Control": "public, max-age=2592000"
+            "Cache-Control": "public, max-age="+process.env.ASSETS_CACHE_TTL
         }).send(stream || null);
     })
     fastify.get(`/${path_name}/js/:asset`, (req, rep) => {
@@ -53,7 +53,7 @@ module.exports = async function (fastify, opts) {
         const stream = createReadStream(join(__dirname, '/assets/js/'+req.params.asset), 'utf8');
         rep.headers({
             "Content-Type": "application/javascript",
-            "Cache-Control": "public, max-age=2592000"
+            "Cache-Control": "public, max-age="+process.env.ASSETS_CACHE_TTL
         }).send(stream || null);
     })
     fastify.get(`/${path_name}/status/:code`, (req, rep) => {
@@ -113,7 +113,7 @@ module.exports = async function (fastify, opts) {
         const options = {method: 'GET', headers: {'User-Agent': 'insomnia/8.3.0'}};
         let req_id = req.headers["cf-ray"] || req.headers["cdn-requestid"] || req.headers["X-Amz-Cf-Id"] || req.headers["akamai-x-get-request-id"] || req.headers["x-appengine-request-log-id"] || req.headers["requestId"] || req.headers["opc-request-id"] || req.id;
         let req_ip = req.headers["Cf-Connecting-Ip"] || req.headers["cf-connecting-ipv6"] || req.headers["x-real-ip"] || req.headers["x-forwarded-for"] || req.ip;
-        let ttl = 7884000000; // 3 Monate
+        let ttl = process.env.IP_DATA_CACHE_TTL; // 3 Month
         let val = await getCache(req_ip);
         const rayResponse = function (response) {
             return `Host=${req.headers[":authority"] || req.headers["host"]}\nrequest=${req_id}\nip=${req_ip}\ncountry=${response["data"]["located_resources"][0]["locations"][0]["country"]} # IP resolution by RIPE DB & MaxMind`
