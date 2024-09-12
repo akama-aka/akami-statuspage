@@ -1,7 +1,7 @@
 FROM node:22.8-alpine3.19
 LABEL authors="Akama Aka"
 LABEL org.opencontainers.image.licenses="CC-BY-NC-ND 4.0"
-ENV VERSION=1.1.3 \
+ENV VERSION=1.1.2 \
     SERVER_PORT=8080 \
     SERVER_HOSTNAME=127.0.0.1 \
     SERVER_LOG_LEVEL=info \
