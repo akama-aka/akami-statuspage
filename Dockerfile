@@ -11,12 +11,13 @@ ENV VERSION=1.1.2 \
     XRAY_RESOLVER_UA="Aki-CDN/1.1.2-DEV"
 LABEL org.opencontainers.image.version=$VERSION
 LABEL org.opencontainers.image.description="An custom CDN-CGI Server for 4xx,5xx Status Response Sites."
+RUN apk update
 RUN npm i -g fastify-cli
 RUN mkdir /opt/server
 RUN chown node:node /opt/server
 USER node
 WORKDIR /opt/server
 COPY --chown=node:node ./ /opt/server
-RUN npm i
+RUN npm ci
 EXPOSE $SERVER_PORT
 CMD [ "npm", "run","server"]
