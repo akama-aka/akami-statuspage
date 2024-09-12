@@ -14,7 +14,17 @@ module.exports = async function (fastify, opts) {
     const path = require('node:path')
     const serveStatic = require('serve-static')
 
+    let req_id;
+    let req_ip;
+
+    fastify.addHook('onRequest', async (req, done) => {
+        req_id = await req.headers["cf-ray"] || req.headers["cdn-requestid"] || req.headers["X-Amz-Cf-Id"] || req.headers["akamai-x-get-request-id"] || req.headers["x-appengine-request-log-id"] || req.headers["requestId"] || req.headers["opc-request-id"] || req.id;
+        req_ip = await req.headers["Cf-Connecting-Ip"] || req.headers["cf-connecting-ipv6"] || req.headers["x-real-ip"] || req.headers["x-forwarded-for"] || req.ip;
+        console.log(req_id);
+    })
+
     fastify.use(['/css/*name{.css}', '/js/*name{.js}', '/fonts/*name{.tff}'], serveStatic(path.join(__dirname+'/assets')))
+
     fastify.get(`/${path_name}/css/:asset`, (req, rep) => {
         const reg = /\.css$/.test(req.params.asset)
         if (!reg) {
@@ -102,6 +112,8 @@ module.exports = async function (fastify, opts) {
             // Inject the Styling
             res = res.replace('__implement_style__', '<!--Implemented Styling--><link rel="stylesheet" href="/'+path_name+'/css/bootstrap.min.css">' +
                 '    <link rel="stylesheet" href="/'+path_name+'/css/style.css">')
+            switch (req.params.code) {
+                case "403":
 
             // Inject the Client IP
             const result = res.replace("__implement-ip__", req_ip);
@@ -155,4 +167,6 @@ module.exports = async function (fastify, opts) {
             }
         }
     })
+            let ttl = process.env.IP_DATA_CACHE_TTL; // 3 Month
+            let val = await getCache(req_ip);
 }
