@@ -6,7 +6,8 @@ require('dotenv').config();
 let defaultHeader = {
     "Server": "Aki Solutions",
     "X-Powered-By": "A System by Aki Solutions",
-    "Cache-Control": "private, max-age="+process.env.ASSETS_CACHE_TTL
+    "Cache-Control": "private, max-age="+process.env.ASSETS_CACHE_TTL,
+    "Content-Type": "text/html; charset=utf-8"
 }
 module.exports = async function (fastify, opts) {
     let path_name = process.env.PATH_IDENTIFIER;
@@ -118,7 +119,7 @@ module.exports = async function (fastify, opts) {
     })
         .get(`/${path_name}/xray`, async (req, rep) => {
             // Resolve the IP Country
-            const options = {method: 'GET', headers: {'User-Agent': 'insomnia/8.3.0'}};
+            const options = {method: 'GET', headers: {'User-Agent': process.env.XRAY_RESOLVER_UA}};
             let ttl = process.env.IP_DATA_CACHE_TTL; // 3 Month
             let val = await getCache(req_ip);
             const rayResponse = function (response) {

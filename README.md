@@ -27,6 +27,9 @@ The system utilizes the following environment variables:
 * `SERVER_LOG_LEVEL` - determines the log level used by the server.
 * `PATH_IDENTIFIER` - indicates the path name in the URL for which requests will be redirected to this server.
 * `REDIS_HOST` - The hostname of your Redis Server
+* `ASSETS_CACHE_TTL` - The TTL in milliseconds how long resources like style and other static resources should be stored in between.
+* `IP_DATA_CACHE_TTL` - The TTL in milliseconds for how long the IP data should be temporarily stored in the Redis cache.
+* `XRAY_RESOLVER_UA` - The user agent to be used when an IP is to be resolved. (Is forwarded to RIPE)
 
 ## Installation and setup
 
@@ -71,6 +74,9 @@ services:
       - SERVER_LOG_LEVEL=info
       - PATH_IDENTIFIER=akami-cgi
       - REDIS_HOST=redis-server
+      - ASSETS_CACHE_TTL=2592000
+      - IP_DATA_CACHE_TTL=7884000000
+      - XRAY_RESOLVER_UA=Your-CDN/1.1.2${VERSION}
     ports:
       - 8080:8080
     depends_on:
