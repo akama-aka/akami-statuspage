@@ -11,3 +11,6 @@ svg {
     height:95px;
     fill:grey;
 }
+#dateTime {
+    margin: 0!important;
+}
