@@ -4,9 +4,9 @@ const {join,basename,normalize,resolve } = require("node:path");
 const {getCache, setCache} = require("./middleware/redis-connector");
 require('dotenv').config();
 let defaultHeader = {
-    "Server": "Akami Solutions",
-    "X-Powered-By": "A DNS System by Akami Solutions",
-    "Cache-Control": "private, max-age=2592000"
+    "Server": "Aki Solutions",
+    "X-Powered-By": "A System by Aki Solutions",
+    "Cache-Control": "private, max-age="+process.env.ASSETS_CACHE_TTL
 }
 module.exports = async function (fastify, opts) {
     let path_name = process.env.PATH_IDENTIFIER;
