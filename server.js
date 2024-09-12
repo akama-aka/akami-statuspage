@@ -116,55 +116,6 @@ module.exports = async function (fastify, opts) {
                 rep.headers(defaultHeader).send(result);
             });
     })
-    fastify.get(`/${path_name}/xray`, async (req, rep) => {
-        // Resolve the IP Country
-        const options = {method: 'GET', headers: {'User-Agent': 'insomnia/8.3.0'}};
-        let req_id = req.headers["cf-ray"] || req.headers["cdn-requestid"] || req.headers["X-Amz-Cf-Id"] || req.headers["akamai-x-get-request-id"] || req.headers["x-appengine-request-log-id"] || req.headers["requestId"] || req.headers["opc-request-id"] || req.id;
-        let req_ip = req.headers["Cf-Connecting-Ip"] || req.headers["cf-connecting-ipv6"] || req.headers["x-real-ip"] || req.headers["x-forwarded-for"] || req.ip;
-        let ttl = process.env.IP_DATA_CACHE_TTL; // 3 Month
-        let val = await getCache(req_ip);
-        const rayResponse = function (response) {
-            return `Host=${req.headers[":authority"] || req.headers["host"]}\nrequest=${req_id}\nip=${req_ip}\ncountry=${response["data"]["located_resources"][0]["locations"][0]["country"]} # IP resolution by RIPE DB & MaxMind`
-        }
-        const rayResponseLocal = `Host=${req.headers["host"]}\nRequest ID: ${req_id}\nIP: ${req_ip}\nCountry: Local IP`;
-        if (!val) {
-            return await fetch('https://stat.ripe.net/data/maxmind-geo-lite/data.json?resource=' + req_ip, options)
-                .then(response => response.json())
-                .then(response => {
-                    if (response && response["data"]["located_resources"].length > 0) {
-                        return setCache(req_ip, response, ttl).then((r) => {
-                            if (r.error) {
-                                fastify.log.error(r.error);
-                                return rep.headers("Content-Type", "text/plain").code(500).send("Internal Server Error");
-                            }
-                            return rep.headers("Content-Type", "text/plain").code(200).send(rayResponse(response))
-                        }).catch((err) => {
-                            fastify.log.error(err);
-                            return rep.headers("Content-Type", "text/plain").code(500).send("Internal Server Error");
-                        });
-                    } else {
-                        return setCache(req_ip, response, ttl).then((r) => {
-                            if (r.error) {
-                                fastify.log.error(r.error);
-                            }
-                            return rep.headers("Content-Type", "text/plain").code(200).send(rayResponseLocal);
-                        }).catch((err) => {
-                            fastify.log.error(err);
-                            return rep.headers("Content-Type", "text/plain").code(500).send("Internal Server Error");
-                        });
-                    }
-                }).catch(err => fastify.log.error(err));
-        } else {
-            const response = await JSON.parse(val);
-            if (response && response["data"]["located_resources"].length > 0) {
-                return rep.headers("Content-Type", "text/plain").code(200).send(rayResponse(response));
-            } else {
-                return rep.headers("Content-Type", "text/plain").code(200).send(rayResponseLocal);
-            }
-        }
-    })
-            let ttl = process.env.IP_DATA_CACHE_TTL; // 3 Month
-            let val = await getCache(req_ip);
         .get(`/${path_name}/xray`, async (req, rep) => {
             // Resolve the IP Country
             const options = {method: 'GET', headers: {'User-Agent': 'insomnia/8.3.0'}};
@@ -175,6 +126,12 @@ module.exports = async function (fastify, opts) {
             }
             const rayResponseLocal = `Host=${req.headers["host"]}\nRequest ID: ${req_id}\nIP: ${req_ip}\nCountry: Local IP`;
 
+            // Check if IP is local to reduce traffic
+            const ipv4RegEx = /^(10\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}|172\.(1[6-9]|2[0-9]|3[01])\.[0-9]{1,3}\.[0-9]{1,3}|192\.168\.[0-9]{1,3}\.[0-9]{1,3})$/;
+            const ipv6RegEx = /^fd[a-fA-F0-9:]{0,39}$/;
+            if (ipv4RegEx.test(req_ip) || ipv6RegEx.test(req_ip)) {
+                return rep.headers("Content-Type", "text/plain").code(200).send(rayResponseLocal);
+            }
 
             if (!val) {
                 return await fetch('https://stat.ripe.net/data/maxmind-geo-lite/data.json?resource=' + req_ip, options)
