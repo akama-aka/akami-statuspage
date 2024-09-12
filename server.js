@@ -14,9 +14,7 @@ module.exports = async function (fastify, opts) {
     const path = require('node:path')
     const serveStatic = require('serve-static')
 
-    fastify.use('/css/(.css)', serveStatic(join(__dirname, '/css')));
-    fastify.use('/js/(.js)', serveStatic(join(__dirname, '/js')));
-    fastify.use('/fonts/(.ttf)', serveStatic(join(__dirname, '/fonts')))
+    fastify.use(['/css/*name{.css}', '/js/*name{.js}', '/fonts/*name{.tff}'], serveStatic(path.join(__dirname+'/assets')))
     fastify.get(`/${path_name}/css/:asset`, (req, rep) => {
         const reg = /\.css$/.test(req.params.asset)
         if (!reg) {
