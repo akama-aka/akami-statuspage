@@ -1,12 +1,13 @@
 # Bug Bounty Reporting Program provided by Aki Solutions
 
-This external project is related to Aki Solutions. 
-Due to the fact that Aki Solutions and Akama Aka are currently not generating any revenue and everything is financed with private income, we are unfortunately unable to offer any compensation in the form of money. However, we are always ready to support in other ways. 
+This external project is related to Aki Solutions.
+Due to the fact that Aki Solutions and Akama Aka are currently not generating any revenue and everything is financed with private income, we are unfortunately unable to offer any compensation in the form of money. However, we are always ready to support in other ways.
 
 If you find a security gap, you can report it to us at any time:
 
 E-Mail: akama.aka@akami-solutions.cc
 PGP:
+
 ```
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: A6BF 90E5 B1C6 5DE4 C850 5AA9 FD64 C7D9 3F33 8AAF
