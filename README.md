@@ -21,12 +21,15 @@ Akami Solutions CDN CGI server takes control instead.
 
 The system utilizes the following environment variables:
 
-* `VERSION` - represents the version number of the server.
-* `SERVER_PORT` - represents the port on which the server listens.
-* `SERVER_HOSTNAME` - represents the hostname for the server.
-* `SERVER_LOG_LEVEL` - determines the log level used by the server.
-* `PATH_IDENTIFIER` - indicates the path name in the URL for which requests will be redirected to this server.
-* `REDIS_HOST` - The hostname of your Redis Server
+- `VERSION` - represents the version number of the server.
+- `SERVER_PORT` - represents the port on which the server listens.
+- `SERVER_HOSTNAME` - represents the hostname for the server.
+- `SERVER_LOG_LEVEL` - determines the log level used by the server.
+- `PATH_IDENTIFIER` - indicates the path name in the URL for which requests will be redirected to this server.
+- `REDIS_HOST` - The hostname of your Redis Server
+- `ASSETS_CACHE_TTL` - The TTL in milliseconds how long resources like style and other static resources should be stored in between.
+- `IP_DATA_CACHE_TTL` - The TTL in milliseconds for how long the IP data should be temporarily stored in the Redis cache.
+- `XRAY_RESOLVER_UA` - The user agent to be used when an IP is to be resolved. (Is forwarded to RIPE)
 
 ## Installation and setup
 
@@ -48,17 +51,24 @@ Please see the Docker documentation for more details.
 You can use this Dockerfile to create a Docker image and run the CDN CGI Server in a Docker container. To build the Docker image and start the container, please use the following commands:
 
 1. Build the Docker image:
+
 ```shell
 docker build -t akami-cdn-cgi-server:1.0 .
 ```
+
 2. Start the Docker container:
+
 ```shell
 docker run -p 3000:3000 -d akami-cdn-cgi-server:1.0
 ```
+
 Please note that you may need to use different identifiers, tags or ports depending on your specific application and configuration. For more information about using Docker, see the [official Docker documentation](https://docs.docker.com/get-started/overview/).
+
 ## Docker-Compose
+
 In addition to Docker support, the CDN CGI Server can be also operated using Docker Compose.
 Below is a sample docker-compose.yml that gives an example of how Docker Compose can launch the service:
+
 ```yaml
 version: "3.8"
 services:
@@ -71,6 +81,9 @@ services:
       - SERVER_LOG_LEVEL=info
       - PATH_IDENTIFIER=akami-cgi
       - REDIS_HOST=redis-server
+      - ASSETS_CACHE_TTL=2592000
+      - IP_DATA_CACHE_TTL=7884000000
+      - XRAY_RESOLVER_UA=Your-CDN/1.1.2${VERSION}
     ports:
       - 8080:8080
     depends_on:
@@ -83,14 +96,17 @@ services:
       - :6379
     restart: always
     healthcheck:
-      test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
-
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
 ```
+
 To start the Docker Compose stack use this command:
+
 ```shell
 docker-compose up -d
 ```
+
 ## Support and troubleshooting
+
 For support and troubleshooting, please get in contact with me via [mail](mailto://akama.aka@akami-solutions.cc). For more serious problems, please do not hesitate to contact me!
 
 > [!IMPORTANT]

@@ -1,0 +1,36 @@
+name: Improve Code Quality
+
+on:
+  pull_request:
+    branches:
+      - production
+
+jobs:
+  prettier:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Prettify Code
+        uses: creyD/prettier_action@v4.3
+        with:
+          prettier_options: "--write **/*.{js,md}"
+          only-changed: true
+          file_pattern: "."
+      - name: Push changes
+        env:
+          TOKEN: ${{ secrets.PAT }}
+        run: |
+          git config --global  user.name "github-actions[bot]"
+          git config --global  user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${TOKEN}@github.com/akama-aka/akami-statuspage.git
+          git add -A
+          git commit -m "Prettified code"
+          git push origin ${{ github.head_ref }}
