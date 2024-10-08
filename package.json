@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@fastify/middie": "8.3.2",
+    "@fastify/middie": "9.0.2",
     "cors": "2.8.5",
     "dotenv": "16.4.5",
     "ioredis": "^5.4.1",
