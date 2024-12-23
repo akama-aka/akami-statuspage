@@ -1,20 +1,27 @@
 {
-  "name": "cdn-cgi_statuspages",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "cdn-cgi",
+  "version": "2.0.0-DEV",
+  "description": "Aki Solutions Open Source CDN CGI Backend",
+  "main": "server.js",
   "scripts": {
-    "start": "echo -e '\\033[0;31m WARNING >> This command is deprecated. Please use npm run instead!' && source ./.env && fastify start server.js -p $SERVER_PORT -a $SERVER_HOSTNAME -l $SERVER_LOG_LEVEL \\033[0m ",
-    "server": "([ -f ./.env ] && source ./.env); fastify start server.js -p $SERVER_PORT -a $SERVER_HOSTNAME -l $SERVER_LOG_LEVEL"
+    "server": "node server.js --tls-min-v1.2"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Akama Aka <akama.aka@kitsune.exposed",
+  "license": "ASPL 1.0",
   "dependencies": {
-    "@fastify/middie": "9.0.2",
+    "@fastify/caching": "8.3.0",
+    "@fastify/middie": "8.3.3",
+    "@fortawesome/fontawesome-free": "6.6.0",
+    "@fortawesome/free-brands-svg-icons": "6.6.0",
+    "@fortawesome/free-regular-svg-icons": "6.6.0",
+    "@fortawesome/free-solid-svg-icons": "6.6.0",
     "cors": "2.8.5",
     "dotenv": "16.4.5",
-    "ioredis": "^5.4.1",
-    "serve-static": "2.1.0"
+    "fastify": "4.28.1",
+    "ioredis": "5.4.1",
+    "redis": "4.6.14",
+    "serve-static": "2.1.0",
+    "sharp": "0.33.4"
   }
 }
