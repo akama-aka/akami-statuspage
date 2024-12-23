@@ -1,9 +1,9 @@
-const Redis = require("ioredis");
 const crypto = require("node:crypto");
+const Redis = require("ioredis");
 
 const redisClient = new Redis({
   host: process.env.REDIS_HOST,
-  port: 6379,
+  port: 6379
 });
 
 /**
@@ -15,7 +15,7 @@ const redisClient = new Redis({
  * @returns {Promise<ResultTypes<"OK", Context>[Context["type"]]>}
  */
 async function setCache(key, value, ttl = 3600) {
-  return redisClient.set(key, JSON.stringify(value), "EX", ttl);
+  return redisClient.set(key, JSON.stringify(value), 'EX', ttl);
 }
 
 /**
@@ -29,20 +29,17 @@ async function getCache(key) {
 }
 
 /**
- * @desc Generate Cache Key ID with User-Agent and the Users IP
- * @param ip : string
- * @param useragent :string
- * @returns {Promise<ArrayBuffer>}
+ * @author Akama Aka <akama.aka@akami-solutions.cc>
+ * @desc Returns a Cache Key for Redis Caching
+ * @param ip : string - IP Address of the User
+ * @param useragent : string - User-Agent of the User
+ * @returns {string}
  */
-async function createCacheKey(ip, useragent) {
-  return crypto
-    .createHash("md5")
-    .update(ip + useragent)
-    .digest("hex");
+async function createCacheKey(ip, useragent,) {
+  return crypto.createHash('md5').update(ip + useragent).digest('hex');
 }
 
 module.exports = {
   getCache,
   setCache,
-  createCacheKey,
-};
+}
