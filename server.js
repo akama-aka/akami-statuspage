@@ -1,251 +1,100 @@
-"use strict";
-const { createReadStream, readFile } = require("node:fs");
-const { join, basename, normalize, resolve } = require("node:path");
-const { getCache, setCache } = require("./middleware/redis-connector");
-require("dotenv").config();
-let defaultHeader = {
-  Server: "Aki Solutions",
-  "X-Powered-By": "A System by Aki Solutions",
-  "Cache-Control": "private, max-age=" + process.env.ASSETS_CACHE_TTL,
-  "Content-Type": "text/html; charset=utf-8",
-};
-module.exports = async function (fastify, opts) {
-  let path_name = process.env.PATH_IDENTIFIER;
-  await fastify.register(require("@fastify/middie"));
-  const path = require("node:path");
-  const serveStatic = require("serve-static");
+'use strict'
+const console = require("node:console");
+require('dotenv').config()
+const {join, basename, normalize, resolve} = require("node:path");
+const {createReadStream, path} = require("fs");
+// Fastify
+const server = require('fastify')({logger: true});
 
-  let req_id;
-  let req_ip;
+// Server Routing Mechanic
 
-  fastify.addHook("onRequest", async (req, done) => {
-    req_id =
-      (await req.headers["cf-ray"]) ||
-      req.headers["cdn-requestid"] ||
-      req.headers["X-Amz-Cf-Id"] ||
-      req.headers["akamai-x-get-request-id"] ||
-      req.headers["x-appengine-request-log-id"] ||
-      req.headers["requestId"] ||
-      req.headers["opc-request-id"] ||
-      req.id;
-    req_ip =
-      (await req.headers["Cf-Connecting-Ip"]) ||
-      req.headers["cf-connecting-ipv6"] ||
-      req.headers["x-real-ip"] ||
-      req.headers["x-forwarded-for"] ||
-      req.ip;
-    console.log(req_id);
-  });
+require(__dirname + '/controllers/xray').forEach(loadRoute)
+require(__dirname + '/controllers/status').forEach(loadRoute)
 
-  fastify.use(
-    ["/css/*name{.css}", "/js/*name{.js}", "/fonts/*name{.tff}"],
-    serveStatic(path.join(__dirname + "/assets")),
-  );
+function loadRoute(routeOption) {
+    server.route(routeOption);
+}
 
-  fastify
-    .get(`/${path_name}/css/:asset`, (req, rep) => {
+
+server
+    .get(`/${process.env.PATH_IDENTIFIER}/css/:asset`, (req, rep) => {
       const reg = /\.css$/.test(req.params.asset);
       if (!reg) {
         return false;
       }
       let asset = basename(req.params.asset);
-      let filePath = normalize(join(__dirname, "/assets/css/", asset));
-      let basePath = resolve(__dirname, "assets/css");
+        let filePath = normalize(join(__dirname, "/templates/assets/css/", asset));
+        let basePath = resolve(__dirname, "templates/assets/css");
 
       if (filePath.indexOf(basePath) !== 0) {
         rep.status(403).send("Forbidden");
       } else {
         const stream = createReadStream(filePath, "utf8");
         rep
-          .headers({
-            "Content-Type": "text/css",
-            "Cache-Control": "public, max-age=" + process.env.ASSETS_CACHE_TTL,
-          })
-          .send(stream || null);
+            .headers({
+                "Content-Type": "text/css",
+                "Cache-Control": "public, max-age=" + process.env.ASSETS_CACHE_TTL,
+            })
+            .send(stream || null);
       }
     })
-    .get(`/${path_name}/fonts/:asset`, (req, rep) => {
+    .get(`/${process.env.PATH_IDENTIFIER}/fonts/:asset`, (req, rep) => {
       const reg = /\.ttf$/.test(req.params.asset);
       if (!reg) {
         return false;
       }
       const stream = createReadStream(
-        path.join(__dirname, "/assets/fonts/" + req.params.asset),
-        "utf8",
+          path.join(__dirname, "/templates/assets/fonts/" + req.params.asset),
+          "utf8",
       );
       rep
-        .headers({
-          "Content-Type": "font/ttf",
-          "Cache-Control": "public, max-age=" + process.env.ASSETS_CACHE_TTL,
-        })
-        .send(stream || null);
+          .headers({
+              "Content-Type": "font/ttf",
+              "Cache-Control": "public, max-age=" + process.env.ASSETS_CACHE_TTL,
+          })
+          .send(stream || null);
     })
-    .get(`/${path_name}/js/:asset`, (req, rep) => {
+    .get(`/${process.env.PATH_IDENTIFIER}/js/:asset`, (req, rep) => {
       const reg = /\.js$/.test(req.params.asset);
       if (!reg) {
         return false;
       }
       const stream = createReadStream(
-        join(__dirname, "/assets/js/" + req.params.asset),
-        "utf8",
+          join(__dirname, "/templates/assets/js/" + req.params.asset),
+          "utf8",
       );
       rep
-        .headers({
-          "Content-Type": "application/javascript",
-          "Cache-Control": "public, max-age=" + process.env.ASSETS_CACHE_TTL,
-        })
-        .send(stream || null);
-    })
-    .get(`/${path_name}/status/:code`, (req, rep) => {
-      let fn;
-      switch (req.params.code) {
-        case "403":
-          fn = "accessForbidden.html";
-          break;
-        case "404":
-          fn = "pageNotFound.html";
-          break;
-        case "500":
-          fn = "internalServerError.html";
-          break;
-        case "502":
-          fn = "badGateway.html";
-          break;
-        case "503":
-          fn = "serviceUnavailable.html";
-          break;
-        case "504":
-          fn = "gatewayTimeout.html";
-          break;
-        case "1000":
-          fn = "directAccessForbidden.html";
-          break;
-        case "1001":
-          fn = "noDatabaseConnection.html";
-          break;
-        case "1002":
-          fn = "sslError.html";
-          break;
-        default:
-          fn = "pageNotFound.html";
-      }
-      readFile(join(__dirname, `/html/${fn}`), "utf-8", (err, data) => {
-        if (err) {
-          console.error(err);
-        }
-        // Inject the CloudFlare Ray ID
-        let res = data.replace("__implement-ray-id__", req_id);
-        // Inject the JavaScript Sources at the bottom of the Body
-        res = res.replace(
-          "__implement_body_script__",
-          '<!--Implement Body Scripts--><script src="/' +
-            path_name +
-            '/js/bootstrap.bundle.min.js"></script>',
-        );
-        // Inject the Styling
-        res = res.replace(
-          "__implement_style__",
-          '<!--Implemented Styling--><link rel="stylesheet" href="/' +
-            path_name +
-            '/css/bootstrap.min.css">' +
-            '    <link rel="stylesheet" href="/' +
-            path_name +
-            '/css/style.css">',
-        );
-
-        // Inject the Client IP
-        const result = res.replace("__implement-ip__", req_ip);
-        rep.headers(defaultHeader).send(result);
-      });
-    })
-    .get(`/${path_name}/xray`, async (req, rep) => {
-      // Resolve the IP Country
-      const options = {
-        method: "GET",
-        headers: { "User-Agent": process.env.XRAY_RESOLVER_UA },
-      };
-      let ttl = process.env.IP_DATA_CACHE_TTL; // 3 Month
-      let val = await getCache(req_ip);
-      const rayResponse = function (response) {
-        return `Host=${req.headers[":authority"] || req.headers["host"]}\nrequest=${req_id}\nip=${req_ip}\ncountry=${response["data"]["located_resources"][0]["locations"][0]["country"]} # IP resolution by RIPE DB & MaxMind`;
-      };
-      const rayResponseLocal = `Host=${req.headers["host"]}\nRequest ID: ${req_id}\nIP: ${req_ip}\nCountry: Local IP`;
-
-      // Check if IP is local to reduce traffic
-      const ipv4RegEx =
-        /^(10\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}|172\.(1[6-9]|2[0-9]|3[01])\.[0-9]{1,3}\.[0-9]{1,3}|192\.168\.[0-9]{1,3}\.[0-9]{1,3})$/;
-      const ipv6RegEx = /^fd[a-fA-F0-9:]{0,39}$/;
-      if (ipv4RegEx.test(req_ip) || ipv6RegEx.test(req_ip)) {
-        return rep
-          .headers("Content-Type", "text/plain")
-          .code(200)
-          .send(rayResponseLocal);
-      }
-
-      if (!val) {
-        return await fetch(
-          "https://stat.ripe.net/data/maxmind-geo-lite/data.json?resource=" +
-            req_ip,
-          options,
-        )
-          .then((response) => response.json())
-          .then((response) => {
-            if (response && response["data"]["located_resources"].length > 0) {
-              return setCache(req_ip, response, ttl)
-                .then((r) => {
-                  if (r.error) {
-                    fastify.log.error(r.error);
-                    return rep
-                      .headers("Content-Type", "text/plain")
-                      .code(500)
-                      .send("Internal Server Error");
-                  }
-                  return rep
-                    .headers("Content-Type", "text/plain")
-                    .code(200)
-                    .send(rayResponse(response));
-                })
-                .catch((err) => {
-                  fastify.log.error(err);
-                  return rep
-                    .headers("Content-Type", "text/plain")
-                    .code(500)
-                    .send("Internal Server Error");
-                });
-            } else {
-              return setCache(req_ip, response, ttl)
-                .then((r) => {
-                  if (r.error) {
-                    fastify.log.error(r.error);
-                  }
-                  return rep
-                    .headers("Content-Type", "text/plain")
-                    .code(200)
-                    .send(rayResponseLocal);
-                })
-                .catch((err) => {
-                  fastify.log.error(err);
-                  return rep
-                    .headers("Content-Type", "text/plain")
-                    .code(500)
-                    .send("Internal Server Error");
-                });
-            }
+          .headers({
+              "Content-Type": "application/javascript",
+              "Cache-Control": "public, max-age=" + process.env.ASSETS_CACHE_TTL,
           })
-          .catch((err) => fastify.log.error(err));
-      } else {
-        const response = await JSON.parse(val);
-        if (response && response["data"]["located_resources"].length > 0) {
-          return rep
-            .headers("Content-Type", "text/plain")
-            .code(200)
-            .send(rayResponse(response));
-        } else {
-          return rep
-            .headers("Content-Type", "text/plain")
-            .code(200)
-            .send(rayResponseLocal);
-        }
-      }
-    });
-};
+          .send(stream || null);
+    })
+    .get(`/${process.env.PATH_IDENTIFIER}/lang/lang.json`, (req, rep) => {
+        const stream = createReadStream(join(__dirname, "/lang/lang.json"));
+        rep.headers({
+            "Content-Type": "application/json",
+            "Cache-Control": "public, max-age=" + process.env.ASSETS_CACHE_TTL
+        }).send(stream || null);
+    })
+
+
+// Start Server
+server.listen({host: process.env.SERVER_HOSTNAME, port: process.env.SERVER_PORT}).then(r => {
+    server.log.info(`Server connection established`)
+})
+
+
+// Handle SIGTERM Commands
+
+process.on('SIGTERM' || 'SIGINT' || 'SIGKILL', () => {
+    server.log.warn("Signal received, shutting down server!")
+    server.close(() => {
+        process.exit(0);
+    })
+})
+
+
+module.exports = {
+    server
+}
