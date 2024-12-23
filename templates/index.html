@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    __implement-style__
+    <title>__implement-title__</title>
+</head>
+<body id="body">
+<div class="container container-fluid">
+    <h1 class="display-4 d-flex align-items-center font-weight-bold">
+        __implement-status-code__ - __implement-status-message__ &bullet;
+        <small class="font-monospace h4 align-self-center" id="dateTime" style="margin:0"></small>
+    </h1>
+    <div class="row text-center align-items-center mt-lg-5">
+        <div class="col">
+            <img alt="User Icon"
+                 src="https://aki-solutions.net/aki-cgi/icon/user?height=95&width=95&color=gray&schema=regular">
+            <div><span class="checkmark h3" style="color:transparent;text-shadow: 0 0 0 green;font-size: 35px">✔</span>
+            </div>
+            <div class="h2">__implement-client__</div>
+        </div>
+        <div class="col">
+            <img alt="__implement-cdn-name__ Icon"
+                 src="https://aki-solutions.net/aki-cgi/icon/__implement-cdn-logo__?height=95&width=95&color=gray">
+            <div><span class="checkmark h3" style="color:transparent;text-shadow: 0 0 0 green;font-size: 35px">✔</span>
+            </div>
+            <div class="h2">__implement-cdn-name__</div>
+        </div>
+        <div class="col" id="__implement-hide-proxy__">
+            <img alt="Reverse Proxy Icon"
+                 src="https://aki-solutions.net/aki-cgi/icon/networkWired?height=95&width=95&color=gray">
+            <div><span class="checkmark h3" style="color:transparent;text-shadow: 0 0 0 green;font-size: 35px">✔</span>
+            </div>
+            <div class="h2">__implement-proxy-name__</div>
+        </div>
+        <div class="col">
+            <img alt="End Host Icon"
+                 src="https://aki-solutions.net/aki-cgi/icon/arrowsToCircle?height=95&width=95&color=gray">
+            <div><span class="checkmark h3" style="width: 35px">❌</span></div>
+            <div class="h2">__implement-gateway__</div>
+        </div>
+    </div>
+    <div class="container mt-xxl-5" style="display:flex;flex-direction: row;justify-content: space-around;">
+        <div>
+            <h1>__implement-w1-header__</h1>
+            <p style="max-width: 480px;">__implement-w1__</p>
+        </div>
+        <div>
+            <h1>__implement-w2-header__</h1>
+            <p style="max-width: 480px;">__implement-w2__</p>
+        </div>
+    </div>
+</div>
+<div class="container" style="display:flex;justify-content: space-around;flex-direction: row;width:100%">
+    <div>
+        <b>__implement-req-id-message__</b>&nbsp;__implement-ray-id__
+    </div>
+    <div>
+        <b>__implement-ip-message__</b>&nbsp;<span id="hide-ip?" nonce="8022996723" onclick="showIp()"
+                                                   title="Click to see IP">__implement-ip__</span>
+    </div>
+</div>
+<script>
+    function getCurrentDateTime() {
+        const now = new Date();
+        const date = now.getDate().toString().padStart(2, '0');
+        const month = (now.getMonth() + 1).toString().padStart(2, '0'); // Months are zero based
+        const year = now.getFullYear();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+
+        return `${date}.${month}.${year} ${hours}:${minutes}`;
+    }
+
+    document.getElementById("dateTime").textContent = getCurrentDateTime();
+
+    function darkMode() {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.getElementById("body").setAttribute("data-bs-theme", "dark");
+        }
+    }
+
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.getElementById("body").setAttribute("data-bs-theme", "dark");
+    }
+</script>
+__implement_body_script__
+<br><br><br>
+<small><img alt="Monero Icon"
+            src="https://aki-solutions.net/aki-cgi/icon/monero?height=32&width=32&color=rgba(255,102,0,255)"> Aki Solutions
+    only accepts payments and Donations via Monero</small>
+</body>
+</html>
