@@ -5,6 +5,12 @@ const {join, basename, normalize, resolve} = require("node:path");
 const {createReadStream, path} = require("fs");
 // Fastify
 const server = require('fastify')({logger: true});
+const rateLimit = require('fastify-rate-limit');
+
+server.register(rateLimit, {
+  max: 100, // maximum number of requests
+  timeWindow: '15 minutes' // time window for the rate limit
+});
 
 // Server Routing Mechanic
 
@@ -17,7 +23,7 @@ function loadRoute(routeOption) {
 
 
 server
-    .get(`/${process.env.PATH_IDENTIFIER}/css/:asset`, (req, rep) => {
+    .get(`/${process.env.PATH_IDENTIFIER}/css/:asset`, { config: { rateLimit: { max: 100, timeWindow: '15 minutes' } } }, (req, rep) => {
       const reg = /\.css$/.test(req.params.asset);
       if (!reg) {
         return false;
@@ -38,7 +44,7 @@ server
             .send(stream || null);
       }
     })
-    .get(`/${process.env.PATH_IDENTIFIER}/fonts/:asset`, (req, rep) => {
+    .get(`/${process.env.PATH_IDENTIFIER}/fonts/:asset`, { config: { rateLimit: { max: 100, timeWindow: '15 minutes' } } }, (req, rep) => {
       const reg = /\.ttf$/.test(req.params.asset);
       if (!reg) {
         return false;
@@ -54,7 +60,7 @@ server
           })
           .send(stream || null);
     })
-    .get(`/${process.env.PATH_IDENTIFIER}/js/:asset`, (req, rep) => {
+    .get(`/${process.env.PATH_IDENTIFIER}/js/:asset`, { config: { rateLimit: { max: 100, timeWindow: '15 minutes' } } }, (req, rep) => {
       const reg = /\.js$/.test(req.params.asset);
       if (!reg) {
         return false;
@@ -70,7 +76,7 @@ server
           })
           .send(stream || null);
     })
-    .get(`/${process.env.PATH_IDENTIFIER}/lang/lang.json`, (req, rep) => {
+    .get(`/${process.env.PATH_IDENTIFIER}/lang/lang.json`, { config: { rateLimit: { max: 100, timeWindow: '15 minutes' } } }, (req, rep) => {
         const stream = createReadStream(join(__dirname, "/lang/lang.json"));
         rep.headers({
             "Content-Type": "application/json",
