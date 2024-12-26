@@ -10,7 +10,7 @@
   "author": "Akama Aka <akama.aka@kitsune.exposed",
   "license": "ASPL 1.0",
   "dependencies": {
-    "@fastify/caching": "8.3.0",
+    "@fastify/caching": "9.0.2",
     "@fastify/middie": "8.3.3",
     "@fortawesome/fontawesome-free": "6.6.0",
     "@fortawesome/free-brands-svg-icons": "6.6.0",
