@@ -12,6 +12,7 @@
   "dependencies": {
     "@fastify/caching": "8.3.0",
     "@fastify/middie": "8.3.3",
+    "@fastify/rate-limit": "10.2.1",
     "@fortawesome/fontawesome-free": "6.7.2",
     "@fortawesome/free-brands-svg-icons": "6.7.2",
     "@fortawesome/free-regular-svg-icons": "6.6.0",
@@ -22,6 +23,6 @@
     "ioredis": "5.4.2",
     "redis": "4.7.0",
     "serve-static": "2.1.0",
-    "sharp": "0.33.4"
+    "sharp": "0.33.5"
   }
 }
