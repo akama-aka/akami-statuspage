@@ -10,7 +10,7 @@
   "author": "Akama Aka <akama.aka@kitsune.exposed",
   "license": "ASPL 1.0",
   "dependencies": {
-    "@fastify/caching": "9.0.2",
+    "@fastify/caching": "9.0.3",
     "@fastify/middie": "8.3.3",
     "@fastify/rate-limit": "10.2.1",
     "@fortawesome/fontawesome-free": "6.7.2",
@@ -19,7 +19,7 @@
     "@fortawesome/free-solid-svg-icons": "6.6.0",
     "cors": "2.8.5",
     "dotenv": "16.4.5",
-    "fastify": "5.2.0",
+    "fastify": "5.2.1",
     "ioredis": "5.4.2",
     "redis": "4.7.0",
     "serve-static": "2.1.0",
