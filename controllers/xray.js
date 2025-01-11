@@ -21,7 +21,7 @@ module.exports = [
             const cacheVal = await getCache(ip)
             const rayResponseLocal = `Host=${req.headers["host"]}\nRequest ID: ${id}\nIP: ${ip}\nCountry: Local IP`;
             const responseSchema = async function (response) {
-                return `Host=${req.headers["host"]}\nRequest Id=${id}\nIp=${ip}\nCountry=${response["data"]["located_resources"][0]["locations"][0]["country"] || null}`;
+                return `Host=${req.hostname}\nTimestamp=${Date.now()}\nUserAgent=${req.headers["user-agent"]}\nHttp=${req.protocol}\nRequestId=${id}\nIp=${ip}\nCountry=${response["data"]["located_resources"][0]["locations"][0]["country"] || null}`;
             }
             // Check if IP is local to reduce traffic
             const ipv4RegEx = /^(192\.168\.\d{1,3}\.\d{1,3}|10\.\d{1,3}\.\d{1,3}\.\d{1,3}|127\.\d{1,3}\.\d{1,3}\.\d{1,3}|172\.(1[6-9]|2[0-9]|3[01])\.\d{1,3}\.\d{1,3})$/;
