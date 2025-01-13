@@ -20,7 +20,7 @@
     "dotenv": "16.4.7",
     "fastify": "4.28.1",
     "ioredis": "5.4.1",
-    "redis": "4.6.14",
+    "redis": "4.7.0",
     "serve-static": "2.1.0",
     "sharp": "0.33.5"
   }
