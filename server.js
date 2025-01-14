@@ -110,6 +110,16 @@ server
             "Cache-Control": "public, max-age=" + process.env.ASSETS_CACHE_TTL
         }).send(stream || null);
     })
+    .get("/status", {
+        config: {
+            rateLimit: {
+                max: 100,
+                timeWindow: '15 minutes'
+            }
+        }
+    }, (req, rep) => {
+        rep.send({success: true})
+    })
 
 
 // Start Server
