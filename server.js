@@ -20,7 +20,9 @@ function loadRoute(routeOption) {
     server.route(routeOption);
 }
 
-
+if (!process.env.ASSETS_CACHE_TTL) {
+    process.env.ASSETS_CACHE_TTL = 2592000;
+}
 server
     .get(`/${process.env.PATH_IDENTIFIER}/css/:asset`, {
         config: {
