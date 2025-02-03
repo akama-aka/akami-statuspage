@@ -8,14 +8,14 @@ if (!process.env.ASSETS_CACHE_TTL)
 if (!process.env.IP_DATA_CACHE_TTL)
     process.env.IP_DATA_CACHE_TTL = 7884000000;
 // Fastify
-const server = require('fastify')({logger: process.env.LOGGING})
+const server = require('fastify')({logger: process})
     .register(rateLimit, {
         max: 100, // maximum number of requests
         timeWindow: '15 minutes' // time window for the rate limit
     }).register(require('@fastify/static'), {         // For all Static files like Styling, JavaScript Cde
         prefix: `/${process.env.PATH_IDENTIFIER}/assets/`,
         preCompressed: true,
-        setHeaders: (res) => {
+        setHeaders: () => {
             cacheControl: `public, max-age=${process.env.ASSETS_CACHE_TTL}`
         },
         root: join(__dirname + '/public/assets/')
