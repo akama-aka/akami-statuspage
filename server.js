@@ -11,6 +11,10 @@ const server = require('fastify')({logger: true})
         timeWindow: '15 minutes' // time window for the rate limit
     }).register(require('@fastify/static'), {         // For all Static files like Styling, JavaScript Cde
         prefix: `/${process.env.PATH_IDENTIFIER}/assets/`,
+        preCompressed: true,
+        setHeaders: (res) => {
+            cacheControl: `public, max-age=${process.env.ASSETS_CACHE_TTL}`
+        },
         root: join(__dirname + '/public/assets/')
     })
     .register(require('@fastify/view'), {           // For all Dynamic files like Statuspages and more
