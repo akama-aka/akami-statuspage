@@ -2,7 +2,7 @@ FROM node:22.8-alpine3.19
 
 LABEL authors="Akama Aka <akama.aka@kitsune.exposed>"
 LABEL org.opencontainers.image.licenses="ASPL 1.0"
-LABEL org.opencontainers.image.version=$VERSION
+LABEL org.opencontainers.image.version=${VERSION}
 LABEL org.opencontainers.image.description="Aki Solutions CDN CGI that serves content for Aki Solutions Services"
 ENV VERSION = 2.1.0 \
     SERVER_HOSTNAME = 127.0.0.1 \
