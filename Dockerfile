@@ -11,7 +11,8 @@ ENV VERSION = 2.1.0 \
     PATH_IDENTIFIER = aki-cgi \
     ASSETS_CACHE_TTL=2592000 \
     IP_DATA_CACHE_TTL=7884000000 \
-    XRAY_RESOLVER_UA="My-CDN/2.1.0"
+    XRAY_RESOLVER_UA="My-CDN/2.1.0" \
+    LOGGING = false
 
 RUN apk update
 RUN npm i -g fastify-cli
