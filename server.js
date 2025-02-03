@@ -9,7 +9,18 @@ const server = require('fastify')({logger: true})
     .register(rateLimit, {
         max: 100, // maximum number of requests
         timeWindow: '15 minutes' // time window for the rate limit
-    });
+    }).register(require('@fastify/static'), {         // For all Static files like Styling, JavaScript Cde
+        prefix: `/${process.env.PATH_IDENTIFIER}/assets/`,
+        root: join(__dirname + '/public/assets/')
+    })
+    .register(require('@fastify/view'), {           // For all Dynamic files like Statuspages and more
+        engine: {
+            ejs: require('ejs')
+        },
+        charset: 'utf-8',
+        root: join(__dirname, 'public'),
+        //layout: 'layouts/layout.ejs'
+    })
 
 // Server Routing Mechanic
 
