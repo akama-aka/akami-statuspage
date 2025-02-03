@@ -5,7 +5,7 @@ const {join, basename, normalize, resolve} = require("node:path");
 const {createReadStream, path} = require("fs");
 const rateLimit = require("@fastify/rate-limit");
 // Fastify
-const server = require('fastify')({logger: true})
+const server = require('fastify')({logger: process.env.LOGGING})
     .register(rateLimit, {
         max: 100, // maximum number of requests
         timeWindow: '15 minutes' // time window for the rate limit
