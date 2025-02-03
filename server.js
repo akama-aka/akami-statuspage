@@ -8,7 +8,7 @@ if (!process.env.ASSETS_CACHE_TTL)
 if (!process.env.IP_DATA_CACHE_TTL)
     process.env.IP_DATA_CACHE_TTL = 7884000000;
 // Fastify
-const server = require('fastify')({logger: process})
+const server = require('fastify')({logger: true})
     .register(rateLimit, {
         max: 100, // maximum number of requests
         timeWindow: '15 minutes' // time window for the rate limit
