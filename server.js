@@ -1,9 +1,12 @@
 'use strict'
-const console = require("node:console");
 require('dotenv').config()
-const {join, basename, normalize, resolve} = require("node:path");
-const {createReadStream, path} = require("fs");
+const {join} = require("node:path");
+const {createReadStream} = require("fs");
 const rateLimit = require("@fastify/rate-limit");
+if (!process.env.ASSETS_CACHE_TTL)
+    process.env.ASSETS_CACHE_TTL = 2592000;
+if (!process.env.IP_DATA_CACHE_TTL)
+    process.env.IP_DATA_CACHE_TTL = 7884000000;
 // Fastify
 const server = require('fastify')({logger: process.env.LOGGING})
     .register(rateLimit, {
@@ -34,10 +37,6 @@ require(__dirname + '/controllers/status').forEach(loadRoute)
 
 function loadRoute(routeOption) {
     server.route(routeOption);
-}
-
-if (!process.env.ASSETS_CACHE_TTL) {
-    process.env.ASSETS_CACHE_TTL = 2592000;
 }
 server
     .get(`/${process.env.PATH_IDENTIFIER}/lang/lang.json`, {
