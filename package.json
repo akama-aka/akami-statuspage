@@ -1,6 +1,6 @@
 {
   "name": "cdn-cgi",
-  "version": "2.0.1-DEV",
+  "version": "2.1.0",
   "description": "Aki Solutions Open Source CDN CGI Backend",
   "main": "server.js",
   "scripts": {
