@@ -21,6 +21,7 @@ const server = require('fastify')({logger: true})
         root: join(__dirname, 'public'),
         //layout: 'layouts/layout.ejs'
     })
+    .register(rateLimit)
 
 // Server Routing Mechanic
 
