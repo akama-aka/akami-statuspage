@@ -23,17 +23,17 @@ Aki Solutions CDN CGI server takes control instead.
 
 The system utilizes the following environment variables:
 
-| ENV Name           | Description                                                                              | Default    | Required? |
-|--------------------|------------------------------------------------------------------------------------------|------------|-----------|
-| `VERSION`          | represents the version number of the server.                                             | null       | false     |
-| `SERVER_PORT`      | represents the port on which the server listens.                                         | 8081       | true      |
-| `SERVER_HOSTNAME`  | represents the hostname for the server. (INFO: Has to be 0.0.0.0 if you use a Container) | 127.0.0.1  | true      |
-| `SERVER_LOG_LEVEL` | determines the log level used by the server. (INFO: Will be deprecated soon)             | info       | false     |
-| `REDIS_HOST`       | Hostname of the Redis Server                                                             | null       | true      |
-| `PATH_IDENTIFIER`  | indicates the path name in the URL for which requests will be redirected to this server. | aki-cgi    | true      |
-| `LOGGING`          | Enables Fastify Logging                                                                  | false      | false     |
-| `ASSETS_CACHE_TTL` | Sets the default Cache TTL for assets                                                    | 2592000    | false     |
-| `IP_CACHE_TTL`     | Sets the default Cache TTL for IP Information                                            | 7884000000 | false     |
+| ENV Name            | Description                                                                              | Default    | Required? |
+|---------------------|------------------------------------------------------------------------------------------|------------|-----------|
+| `VERSION`           | represents the version number of the server.                                             | null       | false     |
+| `SERVER_PORT`       | represents the port on which the server listens.                                         | 8081       | true      |
+| `SERVER_HOSTNAME`   | represents the hostname for the server. (INFO: Has to be 0.0.0.0 if you use a Container) | 127.0.0.1  | true      |
+| `SERVER_LOG_LEVEL`  | determines the log level used by the server. (INFO: Will be deprecated soon)             | info       | false     |
+| `REDIS_HOST`        | Hostname of the Redis Server                                                             | null       | true      |
+| `PATH_IDENTIFIER`   | indicates the path name in the URL for which requests will be redirected to this server. | aki-cgi    | true      |
+| `LOGGING`           | Enables Fastify Logging                                                                  | false      | false     |
+| `ASSETS_CACHE_TTL`  | Sets the default Cache TTL for assets                                                    | 2592000    | false     |
+| `IP_DATA_CACHE_TTL` | Sets the default Cache TTL for IP Information                                            | 7884000000 | false     |
 
 ## Installation and setup
 
