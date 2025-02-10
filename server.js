@@ -1,15 +1,34 @@
 'use strict'
-const console = require("node:console");
 require('dotenv').config()
-const {join, basename, normalize, resolve} = require("node:path");
-const {createReadStream, path} = require("fs");
+const {join} = require("node:path");
+const {createReadStream} = require("fs");
 const rateLimit = require("@fastify/rate-limit");
+if (!process.env.ASSETS_CACHE_TTL)
+    process.env.ASSETS_CACHE_TTL = 2592000;
+if (!process.env.IP_DATA_CACHE_TTL)
+    process.env.IP_DATA_CACHE_TTL = 7884000000;
 // Fastify
-const server = require('fastify')({logger: true})
+const server = require('fastify')({logger: process})
     .register(rateLimit, {
         max: 100, // maximum number of requests
         timeWindow: '15 minutes' // time window for the rate limit
-    });
+    }).register(require('@fastify/static'), {         // For all Static files like Styling, JavaScript Cde
+        prefix: `/${process.env.PATH_IDENTIFIER}/assets/`,
+        preCompressed: true,
+        setHeaders: () => {
+            cacheControl: `public, max-age=${process.env.ASSETS_CACHE_TTL}`
+        },
+        root: join(__dirname + '/public/assets/')
+    })
+    .register(require('@fastify/view'), {           // For all Dynamic files like Statuspages and more
+        engine: {
+            ejs: require('ejs')
+        },
+        charset: 'utf-8',
+        root: join(__dirname, 'public'),
+        //layout: 'layouts/layout.ejs'
+    })
+    .register(rateLimit)
 
 // Server Routing Mechanic
 
@@ -19,83 +38,7 @@ require(__dirname + '/controllers/status').forEach(loadRoute)
 function loadRoute(routeOption) {
     server.route(routeOption);
 }
-
-
 server
-    .get(`/${process.env.PATH_IDENTIFIER}/css/:asset`, {
-        config: {
-            rateLimit: {
-                max: 100,
-                timeWindow: '15 minutes'
-            }
-        }
-    }, (req, rep) => {
-      const reg = /\.css$/.test(req.params.asset);
-      if (!reg) {
-        return false;
-      }
-      let asset = basename(req.params.asset);
-        let filePath = normalize(join(__dirname, "/templates/assets/css/", asset));
-        let basePath = resolve(__dirname, "templates/assets/css");
-
-      if (filePath.indexOf(basePath) !== 0) {
-        rep.status(403).send("Forbidden");
-      } else {
-        const stream = createReadStream(filePath, "utf8");
-        rep
-            .headers({
-                "Content-Type": "text/css",
-                "Cache-Control": "public, max-age=" + process.env.ASSETS_CACHE_TTL,
-            })
-            .send(stream || null);
-      }
-    })
-    .get(`/${process.env.PATH_IDENTIFIER}/fonts/:asset`, {
-        config: {
-            rateLimit: {
-                max: 100,
-                timeWindow: '15 minutes'
-            }
-        }
-    }, (req, rep) => {
-      const reg = /\.ttf$/.test(req.params.asset);
-      if (!reg) {
-        return false;
-      }
-      const stream = createReadStream(
-          path.join(__dirname, "/templates/assets/fonts/" + req.params.asset),
-          "utf8",
-      );
-      rep
-          .headers({
-              "Content-Type": "font/ttf",
-              "Cache-Control": "public, max-age=" + process.env.ASSETS_CACHE_TTL,
-          })
-          .send(stream || null);
-    })
-    .get(`/${process.env.PATH_IDENTIFIER}/js/:asset`, {
-        config: {
-            rateLimit: {
-                max: 100,
-                timeWindow: '15 minutes'
-            }
-        }
-    }, (req, rep) => {
-      const reg = /\.js$/.test(req.params.asset);
-      if (!reg) {
-        return false;
-      }
-      const stream = createReadStream(
-          join(__dirname, "/templates/assets/js/" + req.params.asset),
-          "utf8",
-      );
-      rep
-          .headers({
-              "Content-Type": "application/javascript",
-              "Cache-Control": "public, max-age=" + process.env.ASSETS_CACHE_TTL,
-          })
-          .send(stream || null);
-    })
     .get(`/${process.env.PATH_IDENTIFIER}/lang/lang.json`, {
         config: {
             rateLimit: {

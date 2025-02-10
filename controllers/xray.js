@@ -17,7 +17,7 @@ module.exports = [
             const ip = getIp(req.headers) ?? "213.142.96.192" ?? req.ip;
             const id = getId(req.headers) ?? req.id;
             const fetchHeaders = {method: 'GET', headers: {'User-Agent': `cdn-server_${process.env.PATH_IDENTIFIER}`}}
-            const ipCacheTTL = 7884000000;
+            const ipCacheTTL = process.env.IP_DATA_CACHE_TTL;
             const cacheVal = await getCache(ip)
             const rayResponseLocal = `Host=${req.headers["host"]}\nRequest ID: ${id}\nIP: ${ip}\nCountry: Local IP`;
             const responseSchema = async function (response) {
