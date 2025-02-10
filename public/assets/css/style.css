@@ -1,0 +1,23 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+}
+
+svg {
+    width: 95px;
+    height: 95px;
+    fill: grey !important;
+}
+
+#hide-proxy {
+    display: none;
+    visibility: hidden;
+}
+
+#hide-ip\? {
+    visibility: hidden;
+}

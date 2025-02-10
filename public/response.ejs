@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <!--Implemented Styling-->
+    <link rel="stylesheet" href="/<%- process.env.PATH_IDENTIFIER %>/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/<%- process.env.PATH_IDENTIFIER %>/assets/css/style.css">
+    <%= headStyle %>
+    <title><%= title %></title>
+</head>
+<body id="body">
+<div class="container container-fluid">
+    <h1 class="display-4 d-flex align-items-center font-weight-bold">
+        <%= statusCode %> - <%= statusMessage %> &bullet;
+        <small class="font-monospace h4 align-self-center" id="dateTime" style="margin:0"></small>
+    </h1>
+    <div class="row text-center align-items-center mt-lg-5">
+        <div class="col">
+            <img alt="User Icon"
+                 src="https://aki-solutions.net/aki-cgi/icon/user?height=95&width=95&color=gray&schema=regular">
+            <div><span class="checkmark h3" style="color:transparent;text-shadow: 0 0 0 green;font-size: 35px">✔</span>
+            </div>
+            <div class="h2"><%= clientText %></div>
+        </div>
+        <div class="col">
+            <img alt="__implement-cdn-name__ Icon"
+                 src="https://aki-solutions.net/aki-cgi/icon/<%= cdnLogo %>?height=95&width=95&color=gray">
+            <div><span class="checkmark h3" style="color:transparent;text-shadow: 0 0 0 green;font-size: 35px">✔</span>
+            </div>
+            <div class="h2"><%= cdnName %></div>
+        </div>
+        <%
+        if(process.env.PROXY_NAME) {
+        %>
+            <div class="col">
+                <img alt="Reverse Proxy Icon"
+                     src="https://aki-solutions.net/aki-cgi/icon/networkWired?height=95&width=95&color=gray">
+                <div><span class="checkmark h3"
+                           style="color:transparent;text-shadow: 0 0 0 green;font-size: 35px">✔</span>
+                </div>
+                <div class="h2"><%= proxyName %></div>
+            </div>
+        <%
+        }
+        %>
+        <div class="col">
+            <img alt="End Host Icon"
+                 src="https://aki-solutions.net/aki-cgi/icon/arrowsToCircle?height=95&width=95&color=gray">
+            <div><span class="checkmark h3" style="width: 35px">❌</span></div>
+            <div class="h2"><%= gatewayName %></div>
+        </div>
+    </div>
+    <div class="container mt-xxl-5" style="display:flex;flex-direction: row;justify-content: space-around;">
+        <div>
+            <h1><%= w1Header %></h1>
+            <p style="max-width: 480px;"><%= w1 %></p>
+        </div>
+        <div>
+            <h1><%= w2Header %></h1>
+            <p style="max-width: 480px;"><%= w2 %></p>
+        </div>
+    </div>
+</div>
+<div class="container" style="display:flex;justify-content: space-around;flex-direction: row;width:100%">
+    <div>
+        <b><%= reqIdText %></b>&nbsp;<%= reqId %>
+    </div>
+    <div>
+        <b><%= reqIpText %></b>&nbsp;<span id="hide-ip?" nonce="8022996723" onclick="showIp()"
+                                           title="Click to see IP"><%= reqIp %></span>
+    </div>
+</div>
+<script>
+    function getCurrentDateTime() {
+        const now = new Date();
+        const date = now.getDate().toString().padStart(2, '0');
+        const month = (now.getMonth() + 1).toString().padStart(2, '0'); // Months are zero based
+        const year = now.getFullYear();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+
+        return `${date}.${month}.${year} ${hours}:${minutes}`;
+    }
+
+    document.getElementById("dateTime").textContent = getCurrentDateTime();
+
+    function darkMode() {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.getElementById("body").setAttribute("data-bs-theme", "dark");
+        }
+    }
+
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.getElementById("body").setAttribute("data-bs-theme", "dark");
+    }
+</script>
+<script src="/<%- process.env.PATH_IDENTIFIER %>/assets/js/script.js"></script>
+<script src="/<%- process.env.PATH_IDENTIFIER %>/assets/js/bootstrap.bundle.min.js"></script>
+<br><br><br>
+<small><img alt="Monero Icon"
+            src="https://aki-solutions.net/aki-cgi/icon/monero?height=32&width=32&color=rgba(255,102,0,255)"> Aki Solutions
+    only accepts payments and Donations via Monero</small>
+</body>
+</html>

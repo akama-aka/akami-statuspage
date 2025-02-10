@@ -1,7 +1,9 @@
 {
   "en-en": {
     "client": "Client",
+    "gateway": "Gateway",
     "networking": "Networking",
+    "gateway": "Gateway",
     "subtitle1": "What happened?",
     "subtitle2": "What you can do?",
     "requestId": "Request ID:",
